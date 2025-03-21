@@ -536,6 +536,90 @@ nav .container {
     transform: translateY(-3px);
 }
 
+/* New contact direct styles */
+.contact-direct {
+    background-color: var(--white);
+    padding: 30px;
+    border-radius: 6px;
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.contact-direct h3 {
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+    color: var(--primary-color);
+}
+
+.contact-direct p {
+    margin-bottom: 25px;
+    font-size: 1.1rem;
+    color: var(--dark-gray);
+}
+
+.email-btn, .call-btn {
+    width: 80%;
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 15px;
+}
+
+.email-btn {
+    background-color: var(--primary-color);
+}
+
+.call-btn {
+    background-color: var(--secondary-color);
+}
+
+.email-btn:hover, .call-btn:hover {
+    transform: translateY(-3px);
+}
+
+.email-btn i, .call-btn i {
+    margin-right: 10px;
+    font-size: 1.2rem;
+}
+
+.or-divider {
+    width: 100%;
+    text-align: center;
+    margin: 15px 0;
+    position: relative;
+}
+
+.or-divider::before, .or-divider::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    width: 40%;
+    height: 1px;
+    background-color: var(--light-gray);
+}
+
+.or-divider::before {
+    left: 0;
+}
+
+.or-divider::after {
+    right: 0;
+}
+
+.or-divider span {
+    display: inline-block;
+    padding: 0 10px;
+    background-color: var(--white);
+    position: relative;
+    color: var(--dark-gray);
+    font-size: 0.9rem;
+}
+
+/* Old form styles can be removed or kept for future reference */
 .contact-form {
     background-color: var(--white);
     padding: 30px;
