@@ -37,29 +37,22 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Form submission
+    // Form submission - removing the preventDefault since we want the form to actually submit
     const contactForm = document.getElementById('contactForm');
     if (contactForm) {
         contactForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Get form data
+            // Basic validation
             const name = document.getElementById('name').value;
             const email = document.getElementById('email').value;
             const message = document.getElementById('message').value;
             
-            // Basic validation
             if (!name || !email || !message) {
+                e.preventDefault();
                 alert('Please fill in all fields');
                 return;
             }
             
-            // For a real implementation, you would send this data to a server
-            // Using fetch or other AJAX method
-            
-            // Simulate successful submission
-            alert('Thank you for your message! I will get back to you soon.');
-            contactForm.reset();
+            // Form will now submit to Formspree
         });
     }
 
