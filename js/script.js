@@ -22,54 +22,89 @@ document.addEventListener('DOMContentLoaded', function() {
             zhBtn.classList.remove('active');
         }
         
-        // 1. Update all simple elements with data-en/data-zh attributes
-        // (elements without children or with only text nodes)
-        document.querySelectorAll('[data-' + lang + ']').forEach(function(element) {
-            // Skip inputs and elements with other special handling
-            if (element.tagName !== 'INPUT' && element.tagName !== 'TEXTAREA') {
-                // Check if element has no element children (only text nodes or empty)
-                if (!hasElementChildren(element)) {
+        // 更简单、更直接的方法：维护一个要处理的元素选择器列表
+        const selectors = [
+            // 标题和一般文本
+            '.section-title',
+            '.hero-content h2',
+            '.about-text p',
+            '.contact-direct h3',
+            '.contact-direct p',
+            '.contact-info h3',
+            'footer p span',
+            // 各部分标题
+            '.skills-category h3',
+            '.certificate-content h3',
+            '.certificate-issuer',
+            '.certificate-date',
+            '.certificate-desc',
+            // 导航链接
+            '.nav-links a',
+            // 按钮中的文本
+            '.download-btn span',
+            '.email-btn span',
+            '.call-btn span',
+            '.or-divider span'
+        ];
+        
+        // 1. 处理所有带有data-lang属性的元素
+        selectors.forEach(selector => {
+            document.querySelectorAll(selector + '[data-' + lang + ']').forEach(element => {
+                element.textContent = element.getAttribute('data-' + lang);
+            });
+        });
+        
+        // 2. 特别处理所有带有data-lang属性的普通元素（不在上面列表中的）
+        document.querySelectorAll('[data-' + lang + ']').forEach(element => {
+            // 排除INPUT, TEXTAREA和嵌套很复杂的元素
+            if (element.tagName !== 'INPUT' && element.tagName !== 'TEXTAREA' && 
+                !selectors.some(s => element.matches(s))) {
+                // 如果是单一文本节点，直接更新
+                if (element.childNodes.length === 1 && element.childNodes[0].nodeType === 3) {
                     element.textContent = element.getAttribute('data-' + lang);
+                }
+                // 如果只包含图标+文本，只更新文本部分
+                else if (element.childNodes.length === 2 && 
+                        element.firstChild.nodeType === 1 && 
+                        element.firstChild.tagName === 'I') {
+                    // 保留图标，更新文本
+                    const icon = element.firstChild;
+                    element.textContent = element.getAttribute('data-' + lang);
+                    element.insertBefore(icon, element.firstChild);
                 }
             }
         });
         
-        // 2. Handle span elements specifically (should always be updated)
-        document.querySelectorAll('span[data-' + lang + ']').forEach(function(span) {
+        // 3. 专门处理所有span元素（因为它们通常是内联文本）
+        document.querySelectorAll('span[data-' + lang + ']').forEach(span => {
             span.textContent = span.getAttribute('data-' + lang);
         });
         
-        // 3. Handle special button cases with icons
-        document.querySelectorAll('a.btn, button.btn').forEach(function(btn) {
-            const spans = btn.querySelectorAll('span[data-' + lang + ']');
-            spans.forEach(function(span) {
+        // 4. 下载CV按钮特殊处理（因为它非常重要）
+        const downloadBtn = document.querySelector('.download-btn');
+        if (downloadBtn && downloadBtn.hasAttribute('data-' + lang)) {
+            const icon = downloadBtn.querySelector('i');
+            const span = downloadBtn.querySelector('span');
+            
+            if (span && span.hasAttribute('data-' + lang)) {
                 span.textContent = span.getAttribute('data-' + lang);
-            });
-        });
-        
-        // 4. Handle navigation links specifically since they're important
-        document.querySelectorAll('.nav-links a').forEach(function(navLink) {
-            if (navLink.hasAttribute('data-' + lang)) {
-                navLink.textContent = navLink.getAttribute('data-' + lang);
-            }
-        });
-        
-        // 5. Special handling for section titles to ensure they're not lost
-        document.querySelectorAll('.section-title').forEach(function(title) {
-            if (title.hasAttribute('data-' + lang)) {
-                title.textContent = title.getAttribute('data-' + lang);
-            }
-        });
-    }
-    
-    // Helper function to check if an element has element children
-    function hasElementChildren(element) {
-        for (let i = 0; i < element.children.length; i++) {
-            if (element.children[i].nodeType === 1) { // Element node
-                return true;
+            } else if (downloadBtn.hasAttribute('data-' + lang)) {
+                // 如果span不存在或没有data属性，使用按钮的data属性
+                if (icon) {
+                    // 保留图标
+                    const iconClone = icon.cloneNode(true);
+                    downloadBtn.innerHTML = '';
+                    downloadBtn.appendChild(iconClone);
+                    
+                    // 添加文本
+                    const newSpan = document.createElement('span');
+                    newSpan.textContent = downloadBtn.getAttribute('data-' + lang);
+                    downloadBtn.appendChild(newSpan);
+                } else {
+                    downloadBtn.textContent = downloadBtn.getAttribute('data-' + lang);
+                }
             }
         }
-        return false;
     }
     
     // Check for saved language preference
