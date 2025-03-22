@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const zhBtn = document.getElementById('zh-btn');
     const body = document.body;
     
-    // 更加简单的语言切换函数
+    // 全面的语言切换函数
     function setLanguage(lang) {
         console.log("Setting language to:", lang);
         
@@ -22,32 +22,82 @@ document.addEventListener('DOMContentLoaded', function() {
             zhBtn.classList.remove('active');
         }
         
-        // 确保导航和下载按钮正确显示
+        // 1. 确保导航链接正确显示
         document.querySelectorAll('.nav-links a').forEach(function(link) {
-            if (lang === 'zh') {
-                if (link.hasAttribute('data-zh')) {
-                    link.textContent = link.getAttribute('data-zh');
-                }
-            } else {
-                if (link.hasAttribute('data-en')) {
-                    link.textContent = link.getAttribute('data-en');
+            if (link.hasAttribute('data-' + lang)) {
+                link.textContent = link.getAttribute('data-' + lang);
+            }
+        });
+        
+        // 2. 确保下载按钮正确显示
+        const downloadBtn = document.querySelector('.download-btn span');
+        if (downloadBtn && downloadBtn.hasAttribute('data-' + lang)) {
+            downloadBtn.textContent = downloadBtn.getAttribute('data-' + lang);
+        }
+        
+        // 3. 确保所有带data-en/data-zh属性的元素正确显示
+        document.querySelectorAll('[data-' + lang + ']').forEach(function(element) {
+            // 跳过已经处理过的导航链接和下载按钮
+            if (element.matches('.nav-links a') || element.matches('.download-btn span')) {
+                return;
+            }
+            
+            // 对于其他元素，更新文本内容
+            if (element.children.length === 0 || 
+                (element.children.length === 1 && element.firstElementChild.tagName === 'I')) {
+                element.textContent = element.getAttribute('data-' + lang);
+                
+                // 如果元素包含图标，保留图标
+                if (element.children.length === 1 && element.firstElementChild.tagName === 'I') {
+                    const icon = element.firstElementChild;
+                    element.textContent = element.getAttribute('data-' + lang);
+                    element.insertBefore(icon.cloneNode(true), element.firstChild);
                 }
             }
         });
         
-        // 确保下载按钮正确显示
-        const downloadBtn = document.querySelector('.download-btn span');
-        if (downloadBtn) {
-            if (lang === 'zh') {
-                if (downloadBtn.hasAttribute('data-zh')) {
-                    downloadBtn.textContent = downloadBtn.getAttribute('data-zh');
-                }
-            } else {
-                if (downloadBtn.hasAttribute('data-en')) {
-                    downloadBtn.textContent = downloadBtn.getAttribute('data-en');
-                }
+        // 4. 特别处理项目卡片和证书卡片内容
+        // 项目卡片标题和内容
+        document.querySelectorAll('.project-header h3, .project-content p, .project-content li').forEach(function(element) {
+            if (element.hasAttribute('data-' + lang)) {
+                element.textContent = element.getAttribute('data-' + lang);
             }
-        }
+        });
+        
+        // 证书卡片内容
+        document.querySelectorAll('.certificate-content h3, .certificate-issuer, .certificate-date, .certificate-desc').forEach(function(element) {
+            if (element.hasAttribute('data-' + lang)) {
+                element.textContent = element.getAttribute('data-' + lang);
+            }
+        });
+        
+        // 5. 处理技能类别和内容
+        document.querySelectorAll('.skills-category h3, .skill-name').forEach(function(element) {
+            if (element.hasAttribute('data-' + lang)) {
+                element.textContent = element.getAttribute('data-' + lang);
+            }
+        });
+        
+        // 6. 处理联系部分
+        document.querySelectorAll('.contact-info h3, .contact-direct h3, .contact-direct p').forEach(function(element) {
+            if (element.hasAttribute('data-' + lang)) {
+                element.textContent = element.getAttribute('data-' + lang);
+            }
+        });
+        
+        // 7. 处理按钮内的span元素
+        document.querySelectorAll('.btn span').forEach(function(span) {
+            if (span.hasAttribute('data-' + lang)) {
+                span.textContent = span.getAttribute('data-' + lang);
+            }
+        });
+        
+        // 8. 处理页脚文本
+        document.querySelectorAll('footer p span').forEach(function(span) {
+            if (span.hasAttribute('data-' + lang)) {
+                span.textContent = span.getAttribute('data-' + lang);
+            }
+        });
     }
     
     // 从本地存储获取语言设置
