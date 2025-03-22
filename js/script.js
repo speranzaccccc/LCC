@@ -7,80 +7,98 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Check for saved language preference
     const savedLanguage = localStorage.getItem('language') || 'en';
-    setLanguage(savedLanguage);
+    
+    // Set initial language
+    body.className = savedLanguage;
     
     // Set active button based on current language
     if (savedLanguage === 'zh') {
         enBtn.classList.remove('active');
         zhBtn.classList.add('active');
+        updateContent('zh');
     } else {
         enBtn.classList.add('active');
         zhBtn.classList.remove('active');
+        updateContent('en');
     }
     
+    // Add event listeners to language buttons
     enBtn.addEventListener('click', function() {
-        setLanguage('en');
-        zhBtn.classList.remove('active');
-        enBtn.classList.add('active');
+        if (body.className !== 'en') {
+            body.className = 'en';
+            localStorage.setItem('language', 'en');
+            zhBtn.classList.remove('active');
+            enBtn.classList.add('active');
+            updateContent('en');
+        }
     });
     
     zhBtn.addEventListener('click', function() {
-        setLanguage('zh');
-        enBtn.classList.remove('active');
-        zhBtn.classList.add('active');
+        if (body.className !== 'zh') {
+            body.className = 'zh';
+            localStorage.setItem('language', 'zh');
+            enBtn.classList.remove('active');
+            zhBtn.classList.add('active');
+            updateContent('zh');
+        }
     });
     
-    function setLanguage(language) {
-        body.className = language;
-        localStorage.setItem('language', language);
+    // Function to update content based on selected language
+    function updateContent(lang) {
+        console.log("Updating content to language:", lang);
         
-        // For debugging
-        console.log("Setting language to:", language);
-        console.log("Body class:", body.className);
-        
-        if (language === 'zh') {
-            // Handle all elements with data-zh attributes
+        // Update all elements with appropriate data attributes
+        if (lang === 'zh') {
+            // Update all text elements with data-zh attributes
             document.querySelectorAll('[data-zh]').forEach(function(element) {
-                // Skip form elements
                 if (element.tagName !== 'INPUT' && element.tagName !== 'TEXTAREA') {
-                    // Check if it's a container with spans
-                    if (element.querySelector('span')) {
-                        // Do nothing for container elements
-                    } else if (element.tagName === 'A' && element.querySelector('i')) {
-                        // For links with icons, find spans inside
-                        const spans = element.querySelectorAll('span');
-                        spans.forEach(function(span) {
-                            if (span.dataset.zh) {
-                                span.textContent = span.dataset.zh;
-                            }
-                        });
-                    } else {
-                        // Regular elements with data-zh attribute
-                        element.textContent = element.dataset.zh;
+                    // Handle elements with nested content differently
+                    if (element.children.length > 0 && !element.querySelector('span[data-zh]')) {
+                        element.textContent = element.getAttribute('data-zh');
+                    } else if (!element.querySelector('span')) {
+                        // Simple elements
+                        element.textContent = element.getAttribute('data-zh');
                     }
                 }
             });
+            
+            // Handle span elements specifically
+            document.querySelectorAll('span[data-zh]').forEach(function(span) {
+                span.textContent = span.getAttribute('data-zh');
+            });
+            
+            // Handle special elements like buttons with icons
+            document.querySelectorAll('a.btn, button.btn').forEach(function(btn) {
+                const spans = btn.querySelectorAll('span[data-zh]');
+                spans.forEach(function(span) {
+                    span.textContent = span.getAttribute('data-zh');
+                });
+            });
         } else {
-            // Handle all elements with data-en attributes
+            // Update all text elements with data-en attributes
             document.querySelectorAll('[data-en]').forEach(function(element) {
-                // Skip form elements
                 if (element.tagName !== 'INPUT' && element.tagName !== 'TEXTAREA') {
-                    // Check if it's a container with spans
-                    if (element.querySelector('span')) {
-                        // Do nothing for container elements
-                    } else if (element.tagName === 'A' && element.querySelector('i')) {
-                        // For links with icons, find spans inside
-                        const spans = element.querySelectorAll('span');
-                        spans.forEach(function(span) {
-                            if (span.dataset.en) {
-                                span.textContent = span.dataset.en;
-                            }
-                        });
-                    } else {
-                        // Regular elements with data-en attribute
-                        element.textContent = element.dataset.en;
+                    // Handle elements with nested content differently
+                    if (element.children.length > 0 && !element.querySelector('span[data-en]')) {
+                        element.textContent = element.getAttribute('data-en');
+                    } else if (!element.querySelector('span')) {
+                        // Simple elements
+                        element.textContent = element.getAttribute('data-en');
                     }
                 }
+            });
+            
+            // Handle span elements specifically
+            document.querySelectorAll('span[data-en]').forEach(function(span) {
+                span.textContent = span.getAttribute('data-en');
+            });
+            
+            // Handle special elements like buttons with icons
+            document.querySelectorAll('a.btn, button.btn').forEach(function(btn) {
+                const spans = btn.querySelectorAll('span[data-en]');
+                spans.forEach(function(span) {
+                    span.textContent = span.getAttribute('data-en');
+                });
             });
         }
     }
