@@ -5,15 +5,15 @@ document.addEventListener('DOMContentLoaded', function() {
     const zhBtn = document.getElementById('zh-btn');
     const body = document.body;
     
-    // Function to safely update content
+    // 最简单的方法：直接根据语言初始化页面内容，并在切换时重新初始化
     function setLanguage(lang) {
         console.log("Setting language to:", lang);
         
-        // Set body class
+        // 1. 设置body类和本地存储
         body.className = lang;
         localStorage.setItem('language', lang);
         
-        // Update button states
+        // 2. 更新按钮状态
         if (lang === 'zh') {
             enBtn.classList.remove('active');
             zhBtn.classList.add('active');
@@ -22,96 +22,90 @@ document.addEventListener('DOMContentLoaded', function() {
             zhBtn.classList.remove('active');
         }
         
-        // 更简单、更直接的方法：维护一个要处理的元素选择器列表
-        const selectors = [
-            // 标题和一般文本
-            '.section-title',
-            '.hero-content h2',
-            '.about-text p',
-            '.contact-direct h3',
-            '.contact-direct p',
-            '.contact-info h3',
-            'footer p span',
-            // 各部分标题
-            '.skills-category h3',
-            '.certificate-content h3',
-            '.certificate-issuer',
-            '.certificate-date',
-            '.certificate-desc',
-            // 导航链接
-            '.nav-links a',
-            // 按钮中的文本
-            '.download-btn span',
-            '.email-btn span',
-            '.call-btn span',
-            '.or-divider span'
-        ];
-        
-        // 1. 处理所有带有data-lang属性的元素
-        selectors.forEach(selector => {
-            document.querySelectorAll(selector + '[data-' + lang + ']').forEach(element => {
-                element.textContent = element.getAttribute('data-' + lang);
-            });
-        });
-        
-        // 2. 特别处理所有带有data-lang属性的普通元素（不在上面列表中的）
-        document.querySelectorAll('[data-' + lang + ']').forEach(element => {
-            // 排除INPUT, TEXTAREA和嵌套很复杂的元素
-            if (element.tagName !== 'INPUT' && element.tagName !== 'TEXTAREA' && 
-                !selectors.some(s => element.matches(s))) {
-                // 如果是单一文本节点，直接更新
-                if (element.childNodes.length === 1 && element.childNodes[0].nodeType === 3) {
-                    element.textContent = element.getAttribute('data-' + lang);
-                }
-                // 如果只包含图标+文本，只更新文本部分
-                else if (element.childNodes.length === 2 && 
-                        element.firstChild.nodeType === 1 && 
-                        element.firstChild.tagName === 'I') {
-                    // 保留图标，更新文本
-                    const icon = element.firstChild;
-                    element.textContent = element.getAttribute('data-' + lang);
-                    element.insertBefore(icon, element.firstChild);
-                }
-            }
-        });
-        
-        // 3. 专门处理所有span元素（因为它们通常是内联文本）
-        document.querySelectorAll('span[data-' + lang + ']').forEach(span => {
-            span.textContent = span.getAttribute('data-' + lang);
-        });
-        
-        // 4. 下载CV按钮特殊处理（因为它非常重要）
-        const downloadBtn = document.querySelector('.download-btn');
-        if (downloadBtn && downloadBtn.hasAttribute('data-' + lang)) {
-            const icon = downloadBtn.querySelector('i');
-            const span = downloadBtn.querySelector('span');
+        // 3. 更新所有带有data-en或data-zh属性的元素
+        document.querySelectorAll('[data-' + lang + ']').forEach(function(element) {
+            const dataContent = element.getAttribute('data-' + lang);
             
-            if (span && span.hasAttribute('data-' + lang)) {
-                span.textContent = span.getAttribute('data-' + lang);
-            } else if (downloadBtn.hasAttribute('data-' + lang)) {
-                // 如果span不存在或没有data属性，使用按钮的data属性
-                if (icon) {
-                    // 保留图标
-                    const iconClone = icon.cloneNode(true);
-                    downloadBtn.innerHTML = '';
-                    downloadBtn.appendChild(iconClone);
-                    
-                    // 添加文本
-                    const newSpan = document.createElement('span');
-                    newSpan.textContent = downloadBtn.getAttribute('data-' + lang);
-                    downloadBtn.appendChild(newSpan);
+            // 类别1：含有子元素的标题或区块，使用更安全的内容处理方式
+            if (element.classList.contains('section-title') || 
+                element.tagName === 'H1' || 
+                element.tagName === 'H2' || 
+                element.tagName === 'H3' || 
+                element.tagName === 'H4' ||
+                (element.parentNode && element.parentNode.classList.contains('hero-content'))) {
+                element.textContent = dataContent;
+            }
+            // 类别2：span元素，通常是内联文本
+            else if (element.tagName === 'SPAN') {
+                element.textContent = dataContent;
+            }
+            // 类别3：a元素，可能是导航链接
+            else if (element.tagName === 'A') {
+                // 检查是否有icon
+                const hasIcon = element.querySelector('i');
+                if (hasIcon) {
+                    // 保留icon，更新其余文本
+                    const iconClone = hasIcon.cloneNode(true);
+                    // 检查是否有span
+                    const span = element.querySelector('span');
+                    if (span) {
+                        span.textContent = span.getAttribute('data-' + lang) || dataContent;
+                    } else {
+                        element.textContent = dataContent;
+                        element.insertBefore(iconClone, element.firstChild);
+                    }
                 } else {
-                    downloadBtn.textContent = downloadBtn.getAttribute('data-' + lang);
+                    element.textContent = dataContent;
                 }
             }
-        }
+            // 类别4：p元素，通常是段落
+            else if (element.tagName === 'P') {
+                element.textContent = dataContent;
+            }
+            // 类别5：其他元素，使用通用处理方法
+            else {
+                // 只有当元素没有复杂子元素时才直接设置textContent
+                const hasElementChildren = Array.from(element.children).some(child => 
+                    !['I', 'SPAN'].includes(child.tagName));
+                
+                if (!hasElementChildren) {
+                    // 特殊处理按钮和有图标的元素
+                    const icon = element.querySelector('i');
+                    if (icon) {
+                        const iconClone = icon.cloneNode(true);
+                        const span = element.querySelector('span');
+                        
+                        if (span && span.hasAttribute('data-' + lang)) {
+                            // 如果有带data属性的span，只更新span内容
+                            span.textContent = span.getAttribute('data-' + lang);
+                        } else {
+                            // 否则更新整个元素并保留图标
+                            element.innerHTML = '';
+                            element.appendChild(iconClone);
+                            const newSpan = document.createElement('span');
+                            newSpan.textContent = dataContent;
+                            // 添加与原始元素相同的data属性
+                            if (lang === 'en') {
+                                newSpan.setAttribute('data-en', dataContent);
+                            } else {
+                                newSpan.setAttribute('data-zh', dataContent);
+                            }
+                            element.appendChild(document.createTextNode(' '));
+                            element.appendChild(newSpan);
+                        }
+                    } else {
+                        element.textContent = dataContent;
+                    }
+                }
+            }
+        });
     }
     
-    // Check for saved language preference
+    // 初始化语言
     const savedLanguage = localStorage.getItem('language') || 'en';
     setLanguage(savedLanguage);
     
-    // Add event listeners to language buttons
+    // 添加按钮事件监听器
     enBtn.addEventListener('click', function() {
         setLanguage('en');
     });
