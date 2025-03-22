@@ -1,14 +1,35 @@
-# Personal Resume Website
+# 个人简历网站
 
-A professional, clean, and responsive personal resume website for Tianle Huang. This website showcases education, work experience, projects, and skills in an attractive and user-friendly format.
+这是一个响应式个人简历网站，支持中英文双语切换。
 
-## Features
+## 功能特点
 
-- **Responsive Design**: Looks great on all devices (desktop, tablet, mobile)
-- **Modern UI**: Clean and professional design with smooth animations
-- **Interactive Elements**: Contact form and social media links
-- **Downloadable CV**: Option to download PDF version of the resume
-- **Section Navigation**: Easy navigation to different sections of the resume
+- 响应式设计，适配各种设备屏幕
+- 中英文语言切换
+- 平滑滚动导航
+- 技能进度条动画
+- 时间轴动画效果
+- 项目卡片展示
+- 联系方式与社交媒体链接
+
+## 技术栈
+
+- HTML5
+- CSS3 (Flexbox & Grid)
+- JavaScript (原生)
+- Font Awesome 图标
+- Google Fonts
+
+## 如何使用
+
+1. 克隆仓库到本地
+2. 根据自己的信息修改HTML内容
+3. 根据需要调整CSS样式
+4. 部署到GitHub Pages或其他托管服务
+
+## 许可证
+
+MIT
 
 ## Project Structure
 
@@ -22,23 +43,6 @@ A professional, clean, and responsive personal resume website for Tianle Huang. 
 │   └── hero-bg.jpg       # Background image for hero section
 └── CV.pdf                # Downloadable resume
 ```
-
-## How to Use
-
-1. **View the Website**:
-   - Open `index.html` in any modern web browser
-
-2. **Modify Content**:
-   - Edit `index.html` to update your personal information, education, work experience, projects, and skills
-   - Customize styling in `css/styles.css`
-   - Modify animations and interactions in `js/script.js`
-
-3. **Replace Images**:
-   - Replace `img/hero-bg.jpg` with your preferred background image
-   - Add a professional profile photo in the About section
-
-4. **Update CV**:
-   - Replace `CV.pdf` with your updated resume when needed
 
 ## Customization Options
 
