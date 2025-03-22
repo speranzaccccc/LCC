@@ -7,6 +7,25 @@
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        /* 证书图标样式 */
+        .certificate-icon {
+            width: 80px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background-color: var(--primary-color);
+            color: white;
+            margin-right: 20px;
+            flex-shrink: 0;
+        }
+        
+        .certificate-icon i {
+            font-size: 36px;
+        }
+    </style>
 </head>
 <body class="en">
     <header>
@@ -39,11 +58,11 @@
             <div class="container">
                 <div class="hero-content">
                     <h1>Tianle Huang</h1>
-                    <h2 data-en="Data Analyst" data-zh="数据分析师">Data Analyst</h2>
+                    <h2 data-en="Aspiring Data Analyst" data-zh="数据分析师求职者">Aspiring Data Analyst</h2>
                     <div class="hero-cta">
                         <a href="resume.pdf" class="btn download-btn" download>
                             <i class="fas fa-download"></i>
-                            <span data-en="Download CV" data-zh="下载简历">Download CV</span>
+                            <span data-en="Download my CV" data-zh="点击此处下载简历">Download my CV</span>
                         </a>
                     </div>
                 </div>
@@ -61,7 +80,7 @@
                     </div>
                     <div class="about-text">
                         <p data-en="Aspiring data scientist with a strong background in statistics, actuarial science, and mathematics. Currently pursuing a Master's degree in Data Science at University College London. Equipped with practical experience in machine learning, portfolio optimization, and financial data analysis." 
-                        data-zh="作为一名有志向的数据科学家，拥有扎实的统计学、精算科学和数学背景。目前正在伦敦大学学院攻读数据科学硕士学位。具备机器学习、投资组合优化和金融数据分析的实践经验。">
+                        data-zh="作为一名有志向的数据科学家求职者，拥有扎实的统计学、精算科学和数学背景。目前正在伦敦大学学院攻读数据科学硕士学位。具备机器学习、投资组合优化和金融数据分析的实践经验。">
                             Aspiring data scientist with a strong background in statistics, actuarial science, and mathematics. Currently pursuing a Master's degree in Data Science at University College London. Equipped with practical experience in machine learning, portfolio optimization, and financial data analysis.
                         </p>
                         
@@ -93,9 +112,10 @@
                             <span>2024 - Present</span>
                         </div>
                         <div class="timeline-content">
-                            <h3>Master in Data Science</h3>
-                            <h4>University College London, UK</h4>
-                            <p>Core modules: Introduction to Machine Learning; Statistical Design of Investigation; Statistical Computing; Introduction to Statistical Data Science; Applied Machine Learning</p>
+                            <h3 data-en="Master in Data Science" data-zh="数据科学硕士">Master in Data Science</h3>
+                            <h4 data-en="University College London, UK" data-zh="伦敦大学学院，英国">University College London, UK</h4>
+                            <p data-en="Core modules: Introduction to Machine Learning; Statistical Design of Investigation; Statistical Computing; Introduction to Statistical Data Science; Applied Machine Learning" 
+                               data-zh="核心课程：机器学习导论；统计调查设计；统计计算；统计数据科学导论；应用机器学习">Core modules: Introduction to Machine Learning; Statistical Design of Investigation; Statistical Computing; Introduction to Statistical Data Science; Applied Machine Learning</p>
                         </div>
                     </div>
                     <div class="timeline-item">
@@ -103,10 +123,11 @@
                             <span>2023 - 2024</span>
                         </div>
                         <div class="timeline-content">
-                            <h3>Master in Statistics (Financial Statistics)</h3>
-                            <h4>London School of Economics and Political Science, UK</h4>
-                            <p>Classification: Merit</p>
-                            <p>Core modules: Statistical Inference: Principles, Methods and Computation; Financial Statistics; Bayesian Machine Learning; Time Series; Computational Data Science; Distributed Computing for Big Data</p>
+                            <h3 data-en="Master in Statistics (Financial Statistics)" data-zh="统计学硕士（金融统计方向）">Master in Statistics (Financial Statistics)</h3>
+                            <h4 data-en="London School of Economics and Political Science, UK" data-zh="伦敦政治经济学院，英国">London School of Economics and Political Science, UK</h4>
+                            <p data-en="Classification: Merit" data-zh="成绩：良好">Classification: Merit</p>
+                            <p data-en="Core modules: Statistical Inference: Principles, Methods and Computation; Financial Statistics; Bayesian Machine Learning; Time Series; Computational Data Science; Distributed Computing for Big Data" 
+                               data-zh="核心课程：统计推断：原理、方法与计算；金融统计；贝叶斯机器学习；时间序列；计算数据科学；大数据分布式计算">Core modules: Statistical Inference: Principles, Methods and Computation; Financial Statistics; Bayesian Machine Learning; Time Series; Computational Data Science; Distributed Computing for Big Data</p>
                         </div>
                     </div>
                     <div class="timeline-item">
@@ -133,13 +154,17 @@
                             <span>Jul 2022 - Aug 2022</span>
                         </div>
                         <div class="timeline-content">
-                            <h3>Remote Internship</h3>
-                            <h4>BlackRock, USA</h4>
+                            <h3 data-en="Remote Internship" data-zh="远程实习">Remote Internship</h3>
+                            <h4 data-en="BlackRock, USA" data-zh="贝莱德，美国">BlackRock, USA</h4>
                             <ul>
-                                <li>Collaborated with a quantitative analytics researcher on Python programming to complete end-to-end research on individual datasets of Chinese A-shares</li>
-                                <li>Analyzed daily data and calculated daily moving averages for CSI 300 Index stocks for the past five years</li>
-                                <li>Enhanced understanding of Python and quantitative analysis techniques, mastering functions such as data collation, filtering, and visualization using pandas</li>
-                                <li>Analyzed stock price fluctuations and developed investment strategies</li>
+                                <li data-en="Collaborated with a quantitative analytics researcher on Python programming to complete end-to-end research on individual datasets of Chinese A-shares" 
+                                    data-zh="与量化分析研究员合作，使用Python编程完成中国A股个股数据集的端到端研究">Collaborated with a quantitative analytics researcher on Python programming to complete end-to-end research on individual datasets of Chinese A-shares</li>
+                                <li data-en="Analyzed daily data and calculated daily moving averages for CSI 300 Index stocks for the past five years" 
+                                    data-zh="分析日度数据并计算沪深300指数成分股过去五年的日均线">Analyzed daily data and calculated daily moving averages for CSI 300 Index stocks for the past five years</li>
+                                <li data-en="Enhanced understanding of Python and quantitative analysis techniques, mastering functions such as data collation, filtering, and visualization using pandas" 
+                                    data-zh="增强对Python和量化分析技术的理解，掌握使用pandas进行数据整理、筛选和可视化等功能">Enhanced understanding of Python and quantitative analysis techniques, mastering functions such as data collation, filtering, and visualization using pandas</li>
+                                <li data-en="Analyzed stock price fluctuations and developed investment strategies" 
+                                    data-zh="分析股票价格波动并开发投资策略">Analyzed stock price fluctuations and developed investment strategies</li>
                             </ul>
                         </div>
                     </div>
@@ -153,41 +178,49 @@
                 <div class="projects-grid">
                     <div class="project-card">
                         <div class="project-header">
-                            <h3>Portfolio Optimization Using Genetic Algorithm</h3>
+                            <h3 data-en="Portfolio Optimization Using Genetic Algorithm" data-zh="使用遗传算法的投资组合优化">Portfolio Optimization Using Genetic Algorithm</h3>
                             <div class="project-tags">
-                                <span class="tag">Python</span>
-                                <span class="tag">Finance</span>
-                                <span class="tag">Machine Learning</span>
+                                <span class="tag" data-en="Python" data-zh="Python">Python</span>
+                                <span class="tag" data-en="Finance" data-zh="金融">Finance</span>
+                                <span class="tag" data-en="Machine Learning" data-zh="机器学习">Machine Learning</span>
                             </div>
                         </div>
                         <div class="project-content">
                             <p class="project-date">Nov 2023 - Jan 2024</p>
                             <ul>
-                                <li>Developed genetic algorithms to optimize portfolio performance by maximizing Sharpe ratios</li>
-                                <li>Coded portfolios in real and binary format to efficiently process financial data from Yahoo Finance and IEX</li>
-                                <li>Incorporated parallel computing to improve algorithmic efficiency and model stability</li>
-                                <li>Reduced computation time and improved identification of global optimum in larger datasets</li>
+                                <li data-en="Developed genetic algorithms to optimize portfolio performance by maximizing Sharpe ratios" 
+                                    data-zh="开发遗传算法，通过最大化夏普比率优化投资组合表现">Developed genetic algorithms to optimize portfolio performance by maximizing Sharpe ratios</li>
+                                <li data-en="Coded portfolios in real and binary format to efficiently process financial data from Yahoo Finance and IEX" 
+                                    data-zh="用实数和二进制格式编写投资组合代码，高效处理来自Yahoo Finance和IEX的金融数据">Coded portfolios in real and binary format to efficiently process financial data from Yahoo Finance and IEX</li>
+                                <li data-en="Incorporated parallel computing to improve algorithmic efficiency and model stability" 
+                                    data-zh="引入并行计算，提高算法效率和模型稳定性">Incorporated parallel computing to improve algorithmic efficiency and model stability</li>
+                                <li data-en="Reduced computation time and improved identification of global optimum in larger datasets" 
+                                    data-zh="减少计算时间，并在更大的数据集中改进全局最优解的识别">Reduced computation time and improved identification of global optimum in larger datasets</li>
                             </ul>
                         </div>
                     </div>
                     
                     <div class="project-card">
                         <div class="project-header">
-                            <h3>AI Real-Time News Summarization and Sentiment Analysis with Kafka</h3>
+                            <h3 data-en="AI Real-Time News Summarization and Sentiment Analysis with Kafka" data-zh="基于Kafka的AI实时新闻摘要和情感分析">AI Real-Time News Summarization and Sentiment Analysis with Kafka</h3>
                             <div class="project-tags">
-                                <span class="tag">Python</span>
-                                <span class="tag">Apache Kafka</span>
-                                <span class="tag">Machine Learning</span>
-                                <span class="tag">NLP</span>
+                                <span class="tag" data-en="Python" data-zh="Python">Python</span>
+                                <span class="tag" data-en="Apache Kafka" data-zh="Apache Kafka">Apache Kafka</span>
+                                <span class="tag" data-en="Machine Learning" data-zh="机器学习">Machine Learning</span>
+                                <span class="tag" data-en="NLP" data-zh="自然语言处理">NLP</span>
                             </div>
                         </div>
                         <div class="project-content">
                             <p class="project-date">Apr 2024 - May 2024</p>
                             <ul>
-                                <li>Designed and implemented a real-time news processing system based on Apache Kafka</li>
-                                <li>Crawled news from Google News and used ML models to classify news by sentiment</li>
-                                <li>Used Spark for data preprocessing and distributed training of ML models</li>
-                                <li>Generated news summaries using ChatGPT API for efficient and accurate content summaries</li>
+                                <li data-en="Designed and implemented a real-time news processing system based on Apache Kafka" 
+                                    data-zh="设计并实现了基于Apache Kafka的实时新闻处理系统">Designed and implemented a real-time news processing system based on Apache Kafka</li>
+                                <li data-en="Crawled news from Google News and used ML models to classify news by sentiment" 
+                                    data-zh="从Google新闻抓取数据，并使用机器学习模型按情感分类新闻">Crawled news from Google News and used ML models to classify news by sentiment</li>
+                                <li data-en="Used Spark for data preprocessing and distributed training of ML models" 
+                                    data-zh="使用Spark进行数据预处理和分布式训练机器学习模型">Used Spark for data preprocessing and distributed training of ML models</li>
+                                <li data-en="Generated news summaries using ChatGPT API for efficient and accurate content summaries" 
+                                    data-zh="使用ChatGPT API生成新闻摘要，高效准确地总结内容">Generated news summaries using ChatGPT API for efficient and accurate content summaries</li>
                             </ul>
                         </div>
                     </div>
@@ -200,8 +233,8 @@
                 <h2 class="section-title" data-en="Certificates" data-zh="证书">Certificates</h2>
                 <div class="certificates-container">
                     <div class="certificate-card">
-                        <div class="certificate-logo">
-                            <img src="img/cqf.png" alt="CQF logo">
+                        <div class="certificate-icon">
+                            <i class="fas fa-award"></i>
                         </div>
                         <div class="certificate-content">
                             <h3 data-en="Certificate in Quantitative Finance (CQF)" data-zh="量化金融证书 (CQF)">Certificate in Quantitative Finance (CQF)</h3>

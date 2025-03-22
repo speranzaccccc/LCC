@@ -56,9 +56,30 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
         
-        // 4. 特别处理项目卡片和证书卡片内容
+        // 4. 处理特殊内容区域
+        // 处理各部分的标题（如教育经历、工作经历等）
+        document.querySelectorAll('.section-title').forEach(function(element) {
+            if (element.hasAttribute('data-' + lang)) {
+                element.textContent = element.getAttribute('data-' + lang);
+            }
+        });
+        
+        // 处理教育经历内容
+        document.querySelectorAll('.timeline-content h3, .timeline-content h4, .timeline-content p').forEach(function(element) {
+            if (element.hasAttribute('data-' + lang)) {
+                element.textContent = element.getAttribute('data-' + lang);
+            }
+        });
+        
+        // 处理工作经历和项目经历中的列表项
+        document.querySelectorAll('.timeline-content li, .project-content li').forEach(function(element) {
+            if (element.hasAttribute('data-' + lang)) {
+                element.textContent = element.getAttribute('data-' + lang);
+            }
+        });
+        
         // 项目卡片标题和内容
-        document.querySelectorAll('.project-header h3, .project-content p, .project-content li').forEach(function(element) {
+        document.querySelectorAll('.project-header h3, .project-content p, .project-content li, .project-tags .tag').forEach(function(element) {
             if (element.hasAttribute('data-' + lang)) {
                 element.textContent = element.getAttribute('data-' + lang);
             }
