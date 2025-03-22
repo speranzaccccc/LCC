@@ -32,7 +32,11 @@ document.addEventListener('DOMContentLoaded', function() {
         // 2. 确保下载按钮正确显示
         const downloadBtn = document.querySelector('.download-btn span');
         if (downloadBtn && downloadBtn.hasAttribute('data-' + lang)) {
+            console.log('Setting download button text to:', downloadBtn.getAttribute('data-' + lang));
             downloadBtn.textContent = downloadBtn.getAttribute('data-' + lang);
+            downloadBtn.style.display = 'inline-block';
+            downloadBtn.style.visibility = 'visible';
+            downloadBtn.style.opacity = '1';
         }
         
         // 3. 确保所有带data-en/data-zh属性的元素正确显示

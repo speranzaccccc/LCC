@@ -181,9 +181,13 @@ nav .container {
 }
 
 .download-btn {
-    padding: 15px 30px;
-    font-size: 1.1rem;
-    background-color: var(--secondary-color);
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 8px !important;
+    padding: 15px 30px !important;
+    font-size: 1.1rem !important;
+    background-color: var(--secondary-color) !important;
 }
 
 .download-btn:hover {
@@ -191,7 +195,22 @@ nav .container {
 }
 
 .download-btn i {
-    margin-right: 10px;
+    display: inline-block !important;
+    margin-right: 8px !important;
+}
+
+.download-btn span {
+    display: inline-block !important;
+    white-space: nowrap !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+/* 确保中文模式下按钮文本显示 */
+body.zh .download-btn span {
+    display: inline-block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
 }
 
 /* About Section */
