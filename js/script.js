@@ -5,7 +5,41 @@ document.addEventListener('DOMContentLoaded', function() {
     const zhBtn = document.getElementById('zh-btn');
     const body = document.body;
     
-    // 最简单的方法：直接根据语言初始化页面内容，并在切换时重新初始化
+    // 重要变化：获取初始页面上的所有元素原始内容，用于恢复
+    // 储存所有带有data-en或data-zh属性的元素的原始HTML
+    const originalElements = {};
+    document.querySelectorAll('[data-en], [data-zh]').forEach(function(element) {
+        // 使用唯一ID标识元素，如果没有ID就用XPath
+        const id = element.id || getXPathForElement(element);
+        originalElements[id] = {
+            html: element.innerHTML,
+            text: element.textContent
+        };
+    });
+    
+    // 获取元素的XPath路径
+    function getXPathForElement(element) {
+        if (element.id !== '')
+            return 'id("' + element.id + '")';
+        
+        if (element === document.body)
+            return '//' + element.tagName.toLowerCase();
+            
+        let ix = 0;
+        const siblings = element.parentNode.childNodes;
+        
+        for (let i = 0; i < siblings.length; i++) {
+            const sibling = siblings[i];
+            
+            if (sibling === element)
+                return getXPathForElement(element.parentNode) + '/' + element.tagName.toLowerCase() + '[' + (ix + 1) + ']';
+                
+            if (sibling.nodeType === 1 && sibling.tagName === element.tagName)
+                ix++;
+        }
+    }
+    
+    // 切换语言函数
     function setLanguage(lang) {
         console.log("Setting language to:", lang);
         
@@ -22,96 +56,84 @@ document.addEventListener('DOMContentLoaded', function() {
             zhBtn.classList.remove('active');
         }
         
-        // 3. 更新所有带有data-en或data-zh属性的元素
-        document.querySelectorAll('[data-' + lang + ']').forEach(function(element) {
-            const dataContent = element.getAttribute('data-' + lang);
-            
-            // 类别1：含有子元素的标题或区块，使用更安全的内容处理方式
-            if (element.classList.contains('section-title') || 
-                element.tagName === 'H1' || 
-                element.tagName === 'H2' || 
-                element.tagName === 'H3' || 
-                element.tagName === 'H4' ||
-                (element.parentNode && element.parentNode.classList.contains('hero-content'))) {
-                element.textContent = dataContent;
-            }
-            // 类别2：span元素，通常是内联文本
-            else if (element.tagName === 'SPAN') {
-                element.textContent = dataContent;
-            }
-            // 类别3：a元素，可能是导航链接
-            else if (element.tagName === 'A') {
-                // 检查是否有icon
-                const hasIcon = element.querySelector('i');
-                if (hasIcon) {
-                    // 保留icon，更新其余文本
-                    const iconClone = hasIcon.cloneNode(true);
-                    // 检查是否有span
-                    const span = element.querySelector('span');
-                    if (span) {
-                        span.textContent = span.getAttribute('data-' + lang) || dataContent;
-                    } else {
-                        element.textContent = dataContent;
-                        element.insertBefore(iconClone, element.firstChild);
-                    }
-                } else {
-                    element.textContent = dataContent;
-                }
-            }
-            // 类别4：p元素，通常是段落
-            else if (element.tagName === 'P') {
-                element.textContent = dataContent;
-            }
-            // 类别5：其他元素，使用通用处理方法
-            else {
-                // 只有当元素没有复杂子元素时才直接设置textContent
-                const hasElementChildren = Array.from(element.children).some(child => 
-                    !['I', 'SPAN'].includes(child.tagName));
-                
-                if (!hasElementChildren) {
-                    // 特殊处理按钮和有图标的元素
-                    const icon = element.querySelector('i');
-                    if (icon) {
-                        const iconClone = icon.cloneNode(true);
-                        const span = element.querySelector('span');
-                        
-                        if (span && span.hasAttribute('data-' + lang)) {
-                            // 如果有带data属性的span，只更新span内容
-                            span.textContent = span.getAttribute('data-' + lang);
-                        } else {
-                            // 否则更新整个元素并保留图标
-                            element.innerHTML = '';
-                            element.appendChild(iconClone);
-                            const newSpan = document.createElement('span');
-                            newSpan.textContent = dataContent;
-                            // 添加与原始元素相同的data属性
-                            if (lang === 'en') {
-                                newSpan.setAttribute('data-en', dataContent);
-                            } else {
-                                newSpan.setAttribute('data-zh', dataContent);
-                            }
-                            element.appendChild(document.createTextNode(' '));
-                            element.appendChild(newSpan);
-                        }
-                    } else {
-                        element.textContent = dataContent;
-                    }
-                }
+        // 3. 首先恢复所有元素到原始状态
+        if (lang === 'en' && body.classList.contains('en-original')) {
+            // 如果是切换回英文且页面是英文原始版本，不做处理直接返回
+            return;
+        }
+        
+        // 对于其他情况，先恢复原始内容
+        document.querySelectorAll('[data-en], [data-zh]').forEach(function(element) {
+            const id = element.id || getXPathForElement(element);
+            if (originalElements[id]) {
+                element.innerHTML = originalElements[id].html;
             }
         });
+        
+        // 4. 然后只有在切换到中文时才替换内容
+        if (lang === 'zh') {
+            document.querySelectorAll('[data-zh]').forEach(function(element) {
+                // 只替换文本内容，保留元素内部结构
+                const zhContent = element.getAttribute('data-zh');
+                
+                // 特殊情况：包含图标的按钮
+                if (element.querySelector('i')) {
+                    const icon = element.querySelector('i');
+                    const span = element.querySelector('span');
+                    
+                    // 如果有span标签，只更新span内容
+                    if (span) {
+                        if (span.hasAttribute('data-zh')) {
+                            span.textContent = span.getAttribute('data-zh');
+                        }
+                    } else {
+                        // 保存图标
+                        const iconHtml = icon.outerHTML;
+                        // 更新内容，保留图标
+                        element.innerHTML = iconHtml + ' ' + zhContent;
+                    }
+                } 
+                // 特殊情况：导航链接
+                else if (element.parentNode && element.parentNode.tagName === 'LI' && 
+                         element.parentNode.parentNode && element.parentNode.parentNode.classList.contains('nav-links')) {
+                    element.textContent = zhContent;
+                }
+                // 一般文本元素
+                else if (!element.querySelector('[data-zh]')) {
+                    // 确保没有子元素也有data-zh属性
+                    element.textContent = zhContent;
+                }
+            });
+        }
     }
     
-    // 初始化语言
-    const savedLanguage = localStorage.getItem('language') || 'en';
-    setLanguage(savedLanguage);
+    // 获取存储的语言偏好，并设置初始按钮状态
+    const savedLanguage = localStorage.getItem('language');
+    
+    // 设置初始语言按钮状态
+    if (savedLanguage === 'zh') {
+        enBtn.classList.remove('active');
+        zhBtn.classList.add('active');
+        body.className = 'zh';
+        // 即使有保存的中文偏好，也等用户手动点击切换
+    } else {
+        // 默认英文
+        enBtn.classList.add('active');
+        zhBtn.classList.remove('active');
+        body.className = 'en en-original'; // 标记为原始英文页面
+    }
     
     // 添加按钮事件监听器
     enBtn.addEventListener('click', function() {
-        setLanguage('en');
+        if (body.className !== 'en' && body.className !== 'en en-original') {
+            setLanguage('en');
+        }
     });
     
     zhBtn.addEventListener('click', function() {
-        setLanguage('zh');
+        if (!body.className.includes('zh')) {
+            setLanguage('zh');
+        }
     });
     
     // Navigation Toggle for Mobile
