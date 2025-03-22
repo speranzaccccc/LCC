@@ -34,34 +34,55 @@ document.addEventListener('DOMContentLoaded', function() {
         body.className = language;
         localStorage.setItem('language', language);
         
-        // Update all elements with data attributes
-        document.querySelectorAll('[data-' + language + ']').forEach(function(element) {
-            // Skip certain elements like inputs or those with special handling
-            if (element.tagName !== 'INPUT' && element.tagName !== 'TEXTAREA') {
-                // Handle elements with spans inside them differently
-                if (element.querySelector('span')) {
-                    const spans = element.querySelectorAll('span');
-                    spans.forEach(function(span) {
-                        if (span.dataset[language]) {
-                            span.textContent = span.dataset[language];
-                        }
-                    });
-                } else if (element.tagName === 'A' && element.querySelector('i')) {
-                    // Handle links with icons
-                    const spans = element.querySelectorAll('span');
-                    spans.forEach(function(span) {
-                        if (span.dataset[language]) {
-                            span.textContent = span.dataset[language];
-                        }
-                    });
-                } else {
-                    // Regular elements
-                    if (element.dataset[language]) {
-                        element.textContent = element.dataset[language];
+        // For debugging
+        console.log("Setting language to:", language);
+        console.log("Body class:", body.className);
+        
+        if (language === 'zh') {
+            // Handle all elements with data-zh attributes
+            document.querySelectorAll('[data-zh]').forEach(function(element) {
+                // Skip form elements
+                if (element.tagName !== 'INPUT' && element.tagName !== 'TEXTAREA') {
+                    // Check if it's a container with spans
+                    if (element.querySelector('span')) {
+                        // Do nothing for container elements
+                    } else if (element.tagName === 'A' && element.querySelector('i')) {
+                        // For links with icons, find spans inside
+                        const spans = element.querySelectorAll('span');
+                        spans.forEach(function(span) {
+                            if (span.dataset.zh) {
+                                span.textContent = span.dataset.zh;
+                            }
+                        });
+                    } else {
+                        // Regular elements with data-zh attribute
+                        element.textContent = element.dataset.zh;
                     }
                 }
-            }
-        });
+            });
+        } else {
+            // Handle all elements with data-en attributes
+            document.querySelectorAll('[data-en]').forEach(function(element) {
+                // Skip form elements
+                if (element.tagName !== 'INPUT' && element.tagName !== 'TEXTAREA') {
+                    // Check if it's a container with spans
+                    if (element.querySelector('span')) {
+                        // Do nothing for container elements
+                    } else if (element.tagName === 'A' && element.querySelector('i')) {
+                        // For links with icons, find spans inside
+                        const spans = element.querySelectorAll('span');
+                        spans.forEach(function(span) {
+                            if (span.dataset.en) {
+                                span.textContent = span.dataset.en;
+                            }
+                        });
+                    } else {
+                        // Regular elements with data-en attribute
+                        element.textContent = element.dataset.en;
+                    }
+                }
+            });
+        }
     }
 
     // Navigation Toggle for Mobile
