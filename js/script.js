@@ -1,5 +1,69 @@
 // Wait for DOM to fully load
 document.addEventListener('DOMContentLoaded', function() {
+    // Language toggle functionality
+    const enBtn = document.getElementById('en-btn');
+    const zhBtn = document.getElementById('zh-btn');
+    const body = document.body;
+    
+    // Check for saved language preference
+    const savedLanguage = localStorage.getItem('language') || 'en';
+    setLanguage(savedLanguage);
+    
+    // Set active button based on current language
+    if (savedLanguage === 'zh') {
+        enBtn.classList.remove('active');
+        zhBtn.classList.add('active');
+    } else {
+        enBtn.classList.add('active');
+        zhBtn.classList.remove('active');
+    }
+    
+    enBtn.addEventListener('click', function() {
+        setLanguage('en');
+        zhBtn.classList.remove('active');
+        enBtn.classList.add('active');
+    });
+    
+    zhBtn.addEventListener('click', function() {
+        setLanguage('zh');
+        enBtn.classList.remove('active');
+        zhBtn.classList.add('active');
+    });
+    
+    function setLanguage(language) {
+        body.className = language;
+        localStorage.setItem('language', language);
+        
+        // Update all elements with data attributes
+        document.querySelectorAll('[data-' + language + ']').forEach(function(element) {
+            // Skip certain elements like inputs or those with special handling
+            if (element.tagName !== 'INPUT' && element.tagName !== 'TEXTAREA') {
+                // Handle elements with spans inside them differently
+                if (element.querySelector('span')) {
+                    const spans = element.querySelectorAll('span');
+                    spans.forEach(function(span) {
+                        if (span.dataset[language]) {
+                            span.textContent = span.dataset[language];
+                        }
+                    });
+                } else if (element.tagName === 'A' && element.querySelector('i')) {
+                    // Handle links with icons
+                    const spans = element.querySelectorAll('span');
+                    spans.forEach(function(span) {
+                        if (span.dataset[language]) {
+                            span.textContent = span.dataset[language];
+                        }
+                    });
+                } else {
+                    // Regular elements
+                    if (element.dataset[language]) {
+                        element.textContent = element.dataset[language];
+                    }
+                }
+            }
+        });
+    }
+
     // Navigation Toggle for Mobile
     const hamburger = document.querySelector('.hamburger');
     const navLinks = document.querySelector('.nav-links');

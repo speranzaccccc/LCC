@@ -92,3 +92,39 @@ A professional, clean, and responsive personal resume website for Tianle Huang. 
 - Regularly update your information to keep the resume current
 - Check form functionality if integrating with a backend service
 - Update your skills and proficiency levels as you grow professionally
+
+## Deployment Options
+
+### GitHub Pages (Free)
+1. Create a GitHub account if you don't have one
+2. Create a new repository named `username.github.io` (replace 'username' with your GitHub username)
+3. Initialize Git in your local project folder:
+   ```
+   git init
+   git add .
+   git commit -m "Initial commit"
+   git remote add origin https://github.com/username/username.github.io.git
+   git push -u origin main
+   ```
+4. Your website will be available at `https://username.github.io`
+
+### Netlify (Free)
+1. Create a Netlify account
+2. Click "New site from Git"
+3. Connect your GitHub/GitLab/Bitbucket account
+4. Select your repository
+5. Deploy with default settings
+6. Your site will be available at a Netlify subdomain (e.g., `https://your-site-name.netlify.app`)
+7. You can set up a custom domain in the Netlify settings
+
+### Vercel (Free)
+1. Create a Vercel account
+2. Import your project from Git
+3. Deploy with default settings
+4. Your site will be available at a Vercel subdomain (e.g., `https://your-site-name.vercel.app`)
+
+### Traditional Web Hosting
+1. Purchase a domain name from a domain registrar
+2. Sign up for a web hosting service
+3. Upload your website files to the hosting server using FTP
+4. Configure your domain to point to your hosting service

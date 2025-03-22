@@ -871,4 +871,64 @@ footer {
         margin-right: 0;
         margin-bottom: 15px;
     }
+}
+
+/* Header Styles */
+.language-toggle {
+    display: flex;
+    margin-right: 20px;
+}
+
+.language-toggle button {
+    background: none;
+    border: 1px solid var(--white);
+    color: var(--white);
+    padding: 5px 10px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: var(--transition);
+}
+
+.language-toggle button:first-child {
+    border-radius: 4px 0 0 4px;
+}
+
+.language-toggle button:last-child {
+    border-radius: 0 4px 4px 0;
+}
+
+.language-toggle button.active {
+    background-color: var(--white);
+    color: var(--primary-color);
+}
+
+.language-toggle button:hover:not(.active) {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Language specific display */
+body.zh [data-zh], body.en [data-en] {
+    display: inline-block;
+}
+
+/* Default language is English */
+body.en [data-en] {
+    display: block;
+}
+
+body.zh [data-zh] {
+    display: none;
+}
+
+body.zh [data-en] {
+    display: none;
+}
+
+body.en [data-zh] {
+    display: none;
+}
+
+/* Override for span elements */
+body.en span[data-en], body.zh span[data-zh] {
+    display: inline;
 } 
