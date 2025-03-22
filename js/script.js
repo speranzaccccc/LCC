@@ -5,104 +5,86 @@ document.addEventListener('DOMContentLoaded', function() {
     const zhBtn = document.getElementById('zh-btn');
     const body = document.body;
     
+    // Function to safely update content
+    function setLanguage(lang) {
+        console.log("Setting language to:", lang);
+        
+        // Set body class
+        body.className = lang;
+        localStorage.setItem('language', lang);
+        
+        // Update button states
+        if (lang === 'zh') {
+            enBtn.classList.remove('active');
+            zhBtn.classList.add('active');
+        } else {
+            enBtn.classList.add('active');
+            zhBtn.classList.remove('active');
+        }
+        
+        // 1. Update all simple elements with data-en/data-zh attributes
+        // (elements without children or with only text nodes)
+        document.querySelectorAll('[data-' + lang + ']').forEach(function(element) {
+            // Skip inputs and elements with other special handling
+            if (element.tagName !== 'INPUT' && element.tagName !== 'TEXTAREA') {
+                // Check if element has no element children (only text nodes or empty)
+                if (!hasElementChildren(element)) {
+                    element.textContent = element.getAttribute('data-' + lang);
+                }
+            }
+        });
+        
+        // 2. Handle span elements specifically (should always be updated)
+        document.querySelectorAll('span[data-' + lang + ']').forEach(function(span) {
+            span.textContent = span.getAttribute('data-' + lang);
+        });
+        
+        // 3. Handle special button cases with icons
+        document.querySelectorAll('a.btn, button.btn').forEach(function(btn) {
+            const spans = btn.querySelectorAll('span[data-' + lang + ']');
+            spans.forEach(function(span) {
+                span.textContent = span.getAttribute('data-' + lang);
+            });
+        });
+        
+        // 4. Handle navigation links specifically since they're important
+        document.querySelectorAll('.nav-links a').forEach(function(navLink) {
+            if (navLink.hasAttribute('data-' + lang)) {
+                navLink.textContent = navLink.getAttribute('data-' + lang);
+            }
+        });
+        
+        // 5. Special handling for section titles to ensure they're not lost
+        document.querySelectorAll('.section-title').forEach(function(title) {
+            if (title.hasAttribute('data-' + lang)) {
+                title.textContent = title.getAttribute('data-' + lang);
+            }
+        });
+    }
+    
+    // Helper function to check if an element has element children
+    function hasElementChildren(element) {
+        for (let i = 0; i < element.children.length; i++) {
+            if (element.children[i].nodeType === 1) { // Element node
+                return true;
+            }
+        }
+        return false;
+    }
+    
     // Check for saved language preference
     const savedLanguage = localStorage.getItem('language') || 'en';
-    
-    // Set initial language
-    body.className = savedLanguage;
-    
-    // Set active button based on current language
-    if (savedLanguage === 'zh') {
-        enBtn.classList.remove('active');
-        zhBtn.classList.add('active');
-        updateContent('zh');
-    } else {
-        enBtn.classList.add('active');
-        zhBtn.classList.remove('active');
-        updateContent('en');
-    }
+    setLanguage(savedLanguage);
     
     // Add event listeners to language buttons
     enBtn.addEventListener('click', function() {
-        if (body.className !== 'en') {
-            body.className = 'en';
-            localStorage.setItem('language', 'en');
-            zhBtn.classList.remove('active');
-            enBtn.classList.add('active');
-            updateContent('en');
-        }
+        setLanguage('en');
     });
     
     zhBtn.addEventListener('click', function() {
-        if (body.className !== 'zh') {
-            body.className = 'zh';
-            localStorage.setItem('language', 'zh');
-            enBtn.classList.remove('active');
-            zhBtn.classList.add('active');
-            updateContent('zh');
-        }
+        setLanguage('zh');
     });
     
-    // Function to update content based on selected language
-    function updateContent(lang) {
-        console.log("Updating content to language:", lang);
-        
-        // Update all elements with appropriate data attributes
-        if (lang === 'zh') {
-            // Update all text elements with data-zh attributes
-            document.querySelectorAll('[data-zh]').forEach(function(element) {
-                if (element.tagName !== 'INPUT' && element.tagName !== 'TEXTAREA') {
-                    // Handle elements with nested content differently
-                    if (element.children.length > 0 && !element.querySelector('span[data-zh]')) {
-                        element.textContent = element.getAttribute('data-zh');
-                    } else if (!element.querySelector('span')) {
-                        // Simple elements
-                        element.textContent = element.getAttribute('data-zh');
-                    }
-                }
-            });
-            
-            // Handle span elements specifically
-            document.querySelectorAll('span[data-zh]').forEach(function(span) {
-                span.textContent = span.getAttribute('data-zh');
-            });
-            
-            // Handle special elements like buttons with icons
-            document.querySelectorAll('a.btn, button.btn').forEach(function(btn) {
-                const spans = btn.querySelectorAll('span[data-zh]');
-                spans.forEach(function(span) {
-                    span.textContent = span.getAttribute('data-zh');
-                });
-            });
-        } else {
-            // Update all text elements with data-en attributes
-            document.querySelectorAll('[data-en]').forEach(function(element) {
-                if (element.tagName !== 'INPUT' && element.tagName !== 'TEXTAREA') {
-                    // Handle elements with nested content differently
-                    if (element.children.length > 0 && !element.querySelector('span[data-en]')) {
-                        element.textContent = element.getAttribute('data-en');
-                    } else if (!element.querySelector('span')) {
-                        // Simple elements
-                        element.textContent = element.getAttribute('data-en');
-                    }
-                }
-            });
-            
-            // Handle span elements specifically
-            document.querySelectorAll('span[data-en]').forEach(function(span) {
-                span.textContent = span.getAttribute('data-en');
-            });
-            
-            // Handle special elements like buttons with icons
-            document.querySelectorAll('a.btn, button.btn').forEach(function(btn) {
-                const spans = btn.querySelectorAll('span[data-en]');
-                spans.forEach(function(span) {
-                    span.textContent = span.getAttribute('data-en');
-                });
-            });
-        }
-    }
-
     // Navigation Toggle for Mobile
     const hamburger = document.querySelector('.hamburger');
     const navLinks = document.querySelector('.nav-links');

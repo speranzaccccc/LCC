@@ -873,55 +873,61 @@ footer {
     }
 }
 
-/* Header Styles */
+/* Language toggle styles update */
 .language-toggle {
     display: flex;
+    align-items: center;
     margin-right: 20px;
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: rgba(255, 255, 255, 0.15);
+    padding: 6px 12px;
     border-radius: 30px;
-    padding: 4px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
+}
+
+.language-toggle i {
+    font-size: 1.3rem;
+    color: var(--white);
+    margin-right: 10px;
+    cursor: pointer;
+    align-self: center;
 }
 
 .language-toggle button {
-    background: none;
+    background: transparent;
     border: none;
     color: var(--white);
-    padding: 6px 12px;
+    padding: 8px 15px;
     cursor: pointer;
-    font-size: 0.9rem;
+    font-size: 1rem;
     font-weight: 600;
     border-radius: 20px;
-    transition: all 0.3s ease;
+    transition: all 0.25s ease;
+    margin: 0 2px;
     position: relative;
-    min-width: 40px;
-    text-align: center;
-}
-
-.language-toggle button:first-child {
-    border-radius: 20px;
-}
-
-.language-toggle button:last-child {
-    border-radius: 20px;
+    overflow: hidden;
 }
 
 .language-toggle button.active {
     background-color: var(--secondary-color);
     color: var(--white);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    transform: translateY(-1px);
 }
 
 .language-toggle button:hover:not(.active) {
-    background-color: rgba(255, 255, 255, 0.2);
+    background-color: rgba(255, 255, 255, 0.25);
+    transform: translateY(-1px);
 }
 
-/* Language specific display */
+.language-toggle button:active {
+    transform: translateY(1px);
+}
+
+/* Language specific display rules */
 body.zh [data-zh], body.en [data-en] {
     display: inline-block;
 }
 
-/* Default language is English */
 body.en [data-en] {
     display: block;
 }
@@ -938,7 +944,7 @@ body.en [data-zh] {
     display: none;
 }
 
-/* Override for span elements */
+/* Override for span elements to ensure proper display */
 body.en span[data-en], body.zh span[data-zh] {
     display: inline;
 } 
