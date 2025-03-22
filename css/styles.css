@@ -924,33 +924,22 @@ footer {
 }
 
 /* Language specific display rules */
-body.en [data-en] {
-    display: inline-block;
+body.en [data-en], body.zh [data-zh] {
+    display: inline;
 }
 
-body.zh [data-zh] {
-    display: inline-block;
-}
-
-body.en [data-zh] {
+body.zh [data-en], body.en [data-zh] {
     display: none;
 }
 
-body.zh [data-en] {
-    display: none;
-}
-
-/* For block-level elements */
+/* Special rules for block elements */
 body.en h1[data-en], 
 body.en h2[data-en], 
 body.en h3[data-en], 
 body.en h4[data-en], 
 body.en p[data-en], 
 body.en div[data-en],
-body.en section[data-en] {
-    display: block;
-}
-
+body.en section[data-en],
 body.zh h1[data-zh], 
 body.zh h2[data-zh], 
 body.zh h3[data-zh], 
@@ -961,13 +950,27 @@ body.zh section[data-zh] {
     display: block;
 }
 
-/* For spans inside links and buttons */
-body.en a span[data-en],
-body.en button span[data-en] {
-    display: inline;
+/* Special rule for the navigation */
+.nav-links a {
+    display: block;
 }
 
-body.zh a span[data-zh],
-body.zh button span[data-zh] {
-    display: inline;
+/* Special rule for the download button */
+.download-btn {
+    display: inline-block !important;
+}
+
+/* Special rules for list items */
+body.en li[data-en], body.zh li[data-zh] {
+    display: list-item;
+}
+
+/* Fix for inline-block elements */
+body.en .nav-links a[data-en], 
+body.zh .nav-links a[data-zh],
+body.en .btn[data-en], 
+body.zh .btn[data-zh],
+body.en a[data-en], 
+body.zh a[data-zh] {
+    display: inline-block;
 } 

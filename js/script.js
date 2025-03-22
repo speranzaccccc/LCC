@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const zhBtn = document.getElementById('zh-btn');
     const body = document.body;
     
-    // 简单的语言切换函数
+    // 更加简单的语言切换函数
     function setLanguage(lang) {
         console.log("Setting language to:", lang);
         
@@ -21,18 +21,45 @@ document.addEventListener('DOMContentLoaded', function() {
             enBtn.classList.add('active');
             zhBtn.classList.remove('active');
         }
+        
+        // 确保导航和下载按钮正确显示
+        document.querySelectorAll('.nav-links a').forEach(function(link) {
+            if (lang === 'zh') {
+                if (link.hasAttribute('data-zh')) {
+                    link.textContent = link.getAttribute('data-zh');
+                }
+            } else {
+                if (link.hasAttribute('data-en')) {
+                    link.textContent = link.getAttribute('data-en');
+                }
+            }
+        });
+        
+        // 确保下载按钮正确显示
+        const downloadBtn = document.querySelector('.download-btn span');
+        if (downloadBtn) {
+            if (lang === 'zh') {
+                if (downloadBtn.hasAttribute('data-zh')) {
+                    downloadBtn.textContent = downloadBtn.getAttribute('data-zh');
+                }
+            } else {
+                if (downloadBtn.hasAttribute('data-en')) {
+                    downloadBtn.textContent = downloadBtn.getAttribute('data-en');
+                }
+            }
+        }
     }
     
     // 从本地存储获取语言设置
     const savedLanguage = localStorage.getItem('language') || 'en';
     
-    // 设置初始状态，只更新按钮样式，不修改内容
+    // 设置初始状态
+    body.className = savedLanguage;
     if (savedLanguage === 'zh') {
-        body.className = 'zh';
         enBtn.classList.remove('active');
         zhBtn.classList.add('active');
+        setLanguage('zh');
     } else {
-        body.className = 'en';
         enBtn.classList.add('active');
         zhBtn.classList.remove('active');
     }
