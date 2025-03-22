@@ -924,27 +924,50 @@ footer {
 }
 
 /* Language specific display rules */
-body.zh [data-zh], body.en [data-en] {
+body.en [data-en] {
     display: inline-block;
 }
 
-body.en [data-en] {
-    display: block;
-}
-
 body.zh [data-zh] {
-    display: block;
-}
-
-body.zh [data-en] {
-    display: none;
+    display: inline-block;
 }
 
 body.en [data-zh] {
     display: none;
 }
 
-/* Override for span elements to ensure proper display */
-body.en span[data-en], body.zh span[data-zh] {
+body.zh [data-en] {
+    display: none;
+}
+
+/* For block-level elements */
+body.en h1[data-en], 
+body.en h2[data-en], 
+body.en h3[data-en], 
+body.en h4[data-en], 
+body.en p[data-en], 
+body.en div[data-en],
+body.en section[data-en] {
+    display: block;
+}
+
+body.zh h1[data-zh], 
+body.zh h2[data-zh], 
+body.zh h3[data-zh], 
+body.zh h4[data-zh], 
+body.zh p[data-zh], 
+body.zh div[data-zh],
+body.zh section[data-zh] {
+    display: block;
+}
+
+/* For spans inside links and buttons */
+body.en a span[data-en],
+body.en button span[data-en] {
+    display: inline;
+}
+
+body.zh a span[data-zh],
+body.zh button span[data-zh] {
     display: inline;
 } 
