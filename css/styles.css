@@ -163,10 +163,10 @@ body.zh {
     height: 100vh;
     display: flex;
     align-items: center;
-    background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+    background: linear-gradient(120deg, #f8f9fa 0%, #e9ecef 100%);
     position: relative;
     overflow: hidden;
-    color: var(--white);
+    color: var(--text-color);
 }
 
 .hero::before {
@@ -177,10 +177,24 @@ body.zh {
     width: 100%;
     height: 100%;
     background: 
-        radial-gradient(circle at 20% 30%, rgba(41, 128, 185, 0.05) 0%, transparent 100px),
-        radial-gradient(circle at 80% 70%, rgba(52, 152, 219, 0.07) 0%, transparent 150px),
-        linear-gradient(45deg, transparent 48%, rgba(236, 240, 241, 0.6) 49%, rgba(236, 240, 241, 0.6) 51%, transparent 52%);
-    background-size: 100% 100%, 100% 100%, 20px 20px;
+        radial-gradient(circle at 20% 30%, rgba(52, 152, 219, 0.03) 0%, transparent 80px),
+        radial-gradient(circle at 80% 70%, rgba(41, 128, 185, 0.04) 0%, transparent 120px);
+    z-index: 0;
+}
+
+/* 添加微妙的几何元素 */
+.hero::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        linear-gradient(45deg, transparent 48%, rgba(52, 152, 219, 0.03) 49%, rgba(52, 152, 219, 0.03) 51%, transparent 52%),
+        linear-gradient(-45deg, transparent 48%, rgba(52, 152, 219, 0.03) 49%, rgba(52, 152, 219, 0.03) 51%, transparent 52%);
+    background-size: 50px 50px;
+    opacity: 0.5;
     z-index: 0;
 }
 
@@ -193,16 +207,15 @@ body.zh {
 .hero h1 {
     font-size: 3.5rem;
     margin-bottom: 20px;
-    background: var(--gradient);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    color: var(--primary-color);
+    font-weight: 700;
     line-height: 1.2;
 }
 
 .hero h2 {
     font-size: 1.8rem;
     margin-bottom: 25px;
-    color: var(--white);
+    color: var(--secondary-color);
 }
 
 .hero-cta {
