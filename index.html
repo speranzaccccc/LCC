@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valeria Li - Resume</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body class="en">
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="container nav-container">
+            <a href="#" class="logo"><span>Valeria Li</span></a>
+            
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            
+            <ul class="nav-links">
+                <li><a href="#about" data-en="About" data-zh="关于我">About</a></li>
+                <li><a href="#education" data-en="Education" data-zh="教育经历">Education</a></li>
+                <li><a href="#experience" data-en="Experience" data-zh="工作经历">Experience</a></li>
+                <li><a href="#projects" data-en="Projects" data-zh="项目经历">Projects</a></li>
+                <li><a href="#activities" data-en="Activities" data-zh="课外活动">Activities</a></li>
+                <li><a href="#contact" data-en="Contact" data-zh="联系方式">Contact</a></li>
+            </ul>
+            
+            <div class="language-toggle">
+                <button id="en-btn" class="lang-btn active">EN</button>
+                <button id="zh-btn" class="lang-btn">中文</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 首页英雄版块 -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Valeria Li</h1>
+                <h2 data-en="Aspiring Management Professional" data-zh="管理专业人才">Aspiring Management Professional</h2>
+                <div class="hero-cta">
+                    <a href="CV English.pdf" class="btn download-btn" download>
+                        <i class="fas fa-download"></i>
+                        <span data-en="Download my CV" data-zh="下载我的简历">Download my CV</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 关于我 -->
+    <section id="about" class="section">
+        <div class="container">
+            <h2 class="section-title" data-en="About Me" data-zh="关于我">About Me</h2>
+            <div class="about-content">
+                <div class="about-image">
+                    <img src="img/profile.jpg" alt="Valeria Li">
+                </div>
+                <div class="about-text">
+                    <p data-en="Ambitious and driven management graduate with experience in strategic planning, market analysis, and project coordination. Currently pursuing a Master's degree in Management at University College London, building on a First Class Honours undergraduate education from the University of Manchester." 
+                    data-zh="有志向且积极进取的管理专业毕业生，具备战略规划、市场分析和项目协调经验。目前在伦敦大学学院攻读管理学硕士学位，拥有曼彻斯特大学的一等荣誉学士学位。">
+                    Ambitious and driven management graduate with experience in strategic planning, market analysis, and project coordination. Currently pursuing a Master's degree in Management at University College London, building on a First Class Honours undergraduate education from the University of Manchester.
+                    </p>
+                    <p data-en="I combine analytical thinking with creative problem-solving to deliver measurable results, as demonstrated by my market coordination internship at EasyTransfer where I achieved a 15x transaction volume increase. My consultancy project experience has strengthened my ability to develop data-driven strategies and communicate effectively with stakeholders." 
+                    data-zh="我将分析性思维与创造性解决问题相结合，以取得可衡量的成果，正如我在EasyTransfer的市场协调实习中展示的那样，实现了交易量15倍的增长。我的咨询项目经验增强了我制定数据驱动策略和与利益相关者有效沟通的能力。">
+                    I combine analytical thinking with creative problem-solving to deliver measurable results, as demonstrated by my market coordination internship at EasyTransfer where I achieved a 15x transaction volume increase. My consultancy project experience has strengthened my ability to develop data-driven strategies and communicate effectively with stakeholders.
+                    </p>
+                    <p data-en="I am seeking opportunities in management consulting, business analysis, or strategic planning where I can leverage my cross-cultural understanding, analytical capabilities, and leadership experience to drive organizational growth and success." 
+                    data-zh="我正在寻找管理咨询、业务分析或战略规划领域的机会，在那里我可以利用我的跨文化理解、分析能力和领导经验来推动组织增长和成功。">
+                    I am seeking opportunities in management consulting, business analysis, or strategic planning where I can leverage my cross-cultural understanding, analytical capabilities, and leadership experience to drive organizational growth and success.
+                    </p>
+                    
+                    <div class="about-info">
+                        <div class="info-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span class="address" data-en="London, UK" data-zh="英国伦敦">London, UK</span>
+                        </div>
+                        <div class="info-item">
+                            <i class="fas fa-envelope"></i>
+                            <a href="mailto:cvlaleriac@gmail.com">cvlaleriac@gmail.com</a>
+                        </div>
+                        <div class="info-item">
+                            <i class="fas fa-phone"></i>
+                            <a href="tel:+4407719709745" class="phone-number">+4407719709745</a>
+                        </div>
+                        <div class="info-item">
+                            <i class="fab fa-linkedin"></i>
+                            <a href="#" target="_blank">LinkedIn</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 教育经历 -->
+    <section id="education" class="section">
+        <div class="container">
+            <h2 class="section-title" data-en="Education" data-zh="教育经历">Education</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-date">
+                        <span>2024 - 2025</span>
+                    </div>
+                    <div class="timeline-content">
+                        <h3 data-en="Master of Science in Management" data-zh="管理学硕士">Master of Science in Management</h3>
+                        <h4 data-en="University College London, UK" data-zh="英国伦敦大学学院(UCL)">University College London, UK</h4>
+                        <p data-en="Core Modules: Business Strategy, Markets and Customers, Innovation Practices, Organisational Behaviour, Operations and Technology Management, Statistics for Business Research, Decision and Risk Analysis, Financial Frameworks, Managing Finance, Technology Entrepreneurship" 
+                           data-zh="核心课程：商业战略、市场与客户、创新实践、组织行为、运营与技术管理、商业研究统计、决策与风险分析、财务框架、财务管理、技术创业">
+                           Core Modules: Business Strategy, Markets and Customers, Innovation Practices, Organisational Behaviour, Operations and Technology Management, Statistics for Business Research, Decision and Risk Analysis, Financial Frameworks, Managing Finance, Technology Entrepreneurship
+                        </p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">
+                        <span>2021 - 2024</span>
+                    </div>
+                    <div class="timeline-content">
+                        <h3 data-en="Bachelor of Science in Management (Innovation, Strategy and Entrepreneurship)" data-zh="管理学学士（创新、战略与创业方向）">Bachelor of Science in Management (Innovation, Strategy and Entrepreneurship)</h3>
+                        <h4 data-en="University of Manchester, UK" data-zh="英国曼彻斯特大学">University of Manchester, UK</h4>
+                        <p data-en="Classification: First Class" data-zh="成绩：一等荣誉学位">Classification: First Class</p>
+                        <p data-en="Core Modules: Economics Principles, Innovations and Markets, Investment Analysis, Creativity Design & Entrepreneurship, Business Data Analytics, Financial Derivatives, Consultancy Project, Financial Reporting, Management Accounting..." 
+                           data-zh="核心课程：经济学原理、创新与市场、投资分析、创意设计与创业、商业数据分析、金融衍生品、咨询项目、财务报告、管理会计等">
+                           Core Modules: Economics Principles, Innovations and Markets, Investment Analysis, Creativity Design & Entrepreneurship, Business Data Analytics, Financial Derivatives, Consultancy Project, Financial Reporting, Management Accounting...
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 工作经历 -->
+    <section id="experience" class="section">
+        <div class="container">
+            <h2 class="section-title" data-en="Work Experience" data-zh="工作经历">Work Experience</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-date">
+                        <span>Apr 2022 - Sep 2024</span>
+                    </div>
+                    <div class="timeline-content">
+                        <h3 data-en="Market Coordinator Internship" data-zh="市场协调实习生">Market Coordinator Internship</h3>
+                        <h4 data-en="EasyTransfer, China" data-zh="EasyTransfer，中国">EasyTransfer, China</h4>
+                        <ul>
+                            <li data-en="Finished the cycle with the best ROI return in 2021 among one of the major regional market." 
+                                data-zh="在2021年完成了该区域市场中投资回报率（ROI）最高的业务周期。">Finished the cycle with the best ROI return in 2021 among one of the major regional market.</li>
+                            <li data-en="Achieved a transaction amount of ¥136 million in 2022, representing an increase of 15 times before the regional market was established." 
+                                data-zh="2022年实现交易总额1.36亿元人民币，较区域市场成立前增长15倍。">Achieved a transaction amount of ¥136 million in 2022, representing an increase of 15 times before the regional market was established.</li>
+                            <li data-en="Achieved a rate of customer satisfaction of 56%, and a repurchase rate of 62%, representing top 5 five ranking place among all international markets." 
+                                data-zh="客户满意度达56%，复购率达62%，在所有国际市场中排名前五。">Achieved a rate of customer satisfaction of 56%, and a repurchase rate of 62%, representing top 5 five ranking place among all international markets.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 项目经历 -->
+    <section id="projects" class="section">
+        <div class="container">
+            <h2 class="section-title" data-en="Project Experience" data-zh="项目经历">Project Experience</h2>
+            <div class="projects-container">
+                <div class="project-card">
+                    <div class="project-header">
+                        <h3 data-en="Consultancy Project - UKTGA (UK Town and Gown Association)" data-zh="咨询项目- 英国城校联盟（UKTGA）">Consultancy Project - UKTGA (UK Town and Gown Association)</h3>
+                        <div class="project-tags">
+                            <span class="tag" data-en="Consulting" data-zh="咨询">Consulting</span>
+                            <span class="tag" data-en="Strategy" data-zh="战略">Strategy</span>
+                            <span class="tag" data-en="Research" data-zh="研究">Research</span>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <p class="project-date">Sep 2023 - May 2024</p>
+                        <ul>
+                            <li data-en="Collaborated in a team of five to develop a fee-based membership strategy for UKTGA, improving financial sustainability." 
+                                data-zh="与4名团队成员合作，为UKTGA制定会员付费模式战略，提升其财务可持续性。">Collaborated in a team of five to develop a fee-based membership strategy for UKTGA, improving financial sustainability.</li>
+                            <li data-en="Conducted member surveys (300 respondents), focus groups, and competitor benchmarking to inform recommendations." 
+                                data-zh="设计并实施会员调研（300份问卷）、焦点小组讨论及竞争对手基准分析，以支持项目建议。">Conducted member surveys (300 respondents), focus groups, and competitor benchmarking to inform recommendations.</li>
+                            <li data-en="Delivered three presentations, including a final client presentation, and produced a high-scoring report (85%)." 
+                                data-zh="进行了3次演示汇报，包括一次客户最终汇报，并撰写了获得85%高分的最终报告。">Delivered three presentations, including a final client presentation, and produced a high-scoring report (85%).</li>
+                            <li data-en="Enhanced problem-solving, communication, and teamwork skills through client meetings and cross-functional collaboration." 
+                                data-zh="在与客户沟通及跨职能团队合作中，提升了问题解决、沟通与团队协作能力。">Enhanced problem-solving, communication, and teamwork skills through client meetings and cross-functional collaboration.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 课外活动 -->
+    <section id="activities" class="section">
+        <div class="container">
+            <h2 class="section-title" data-en="Extracurricular Activities" data-zh="课外活动">Extracurricular Activities</h2>
+            <div class="projects-container">
+                <div class="project-card activity-card">
+                    <div class="project-header">
+                        <h3 data-en="Manchester-China Innovation and Entrepreneurship Base" data-zh="曼彻斯特中英创新与创业基地">Manchester-China Innovation and Entrepreneurship Base</h3>
+                        <div class="project-tags">
+                            <span class="tag" data-en="Member" data-zh="成员">Member</span>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <p class="project-date activity-date">Sep 2022 - Jun 2023</p>
+                        <ul>
+                            <li data-en="Co-organised the 6th Manchester-China Innovation and Entrepreneurship Summit, facilitating networking between entrepreneurs and investors." 
+                                data-zh="协助组织第六届曼彻斯特-中国创新与创业峰会，促进创业者与投资者之间的交流与合作。">Co-organised the 6th Manchester-China Innovation and Entrepreneurship Summit, facilitating networking between entrepreneurs and investors.</li>
+                            <li data-en="Managed the organisation's official website, improving online visibility and information accessibility for event participants." 
+                                data-zh="负责管理组织官方网站，提升活动参与者的信息获取和网络可见度。">Managed the organisation's official website, improving online visibility and information accessibility for event participants.</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="project-card activity-card">
+                    <div class="project-header">
+                        <h3 data-en="Chinese Debate Society" data-zh="中文辩论社">Chinese Debate Society</h3>
+                        <div class="project-tags">
+                            <span class="tag activity-role" data-en="Member (2021-2022), President (2022-2023)" data-zh="成员（2021-2022年），社长（2022-2023年）">Member (2021-2022), President (2022-2023)</span>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <p class="project-date activity-date">2021 - 2023</p>
+                        <ul>
+                            <li data-en="Champion: Won the Freshman Competition organised by the University of Liverpool." 
+                                data-zh="获得由利物浦大学主办的新生辩论赛冠军。">Champion: Won the Freshman Competition organised by the University of Liverpool.</li>
+                            <li data-en="Led the society as President in 2022, overseeing recruitment, training sessions, and strategic planning." 
+                                data-zh="作为社长，负责社团招新、培训和年度战略规划。">Led the society as President in 2022, overseeing recruitment, training sessions, and strategic planning.</li>
+                            <li data-en="Led the freshman team to secure 2nd place out of 8 teams at the London Freshman Debate Competition, strengthening leadership and mentoring abilities." 
+                                data-zh="带领新生队伍参加伦敦新生辩论赛并获得八支队伍中的第二名，提升了领导与辅导能力。">Led the freshman team to secure 2nd place out of 8 teams at the London Freshman Debate Competition, strengthening leadership and mentoring abilities.</li>
+                            <li data-en="Secured £1,000 in sponsorships within six months, developing commercial awareness and promotional skills." 
+                                data-zh="在六个月内为辩论队筹集到£1,000英镑赞助，锻炼了商业意识和推广能力。">Secured £1,000 in sponsorships within six months, developing commercial awareness and promotional skills.</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="project-card activity-card">
+                    <div class="project-header">
+                        <h3 data-en="Chinese Scholars and Student Association Academic Department" data-zh="中国学者与学生联合会(CSSA)学术部">Chinese Scholars and Student Association Academic Department</h3>
+                        <div class="project-tags">
+                            <span class="tag" data-en="Member" data-zh="成员">Member</span>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <p class="project-date activity-date">Oct 2021 - Jun 2023</p>
+                        <ul>
+                            <li data-en="Organized a Master's and Doctoral Application Experience Sharing Event, attracting 80+ attendees and fostering academic networking." 
+                                data-zh="组织硕士与博士申请经验分享会，吸引80多名听众，促进学术交流与经验共享。">Organized a Master's and Doctoral Application Experience Sharing Event, attracting 80+ attendees and fostering academic networking.</li>
+                            <li data-en="Coordinated the 4th China–UK Forum of International Young Scholars in Manchester, facilitating an event with 40 applicants and 20 invited professors from various universities." 
+                                data-zh="协调举办第四届中英青年学者国际论坛，活动涉及40名申请者和20位来自不同高校的教授。">Coordinated the 4th China–UK Forum of International Young Scholars in Manchester, facilitating an event with 40 applicants and 20 invited professors from various universities.</li>
+                            <li data-en="Developed strong communication, organizational, and problem-solving skills through event management and stakeholder engagement." 
+                                data-zh="在活动组织与利益相关者沟通过程中，提升了沟通、组织与问题解决能力。">Developed strong communication, organizational, and problem-solving skills through event management and stakeholder engagement.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 技能 -->
+    <section id="skills" class="section">
+        <div class="container">
+            <h2 class="section-title" data-en="Skills" data-zh="技能">Skills</h2>
+            <div class="skills-container">
+                <div class="skills-category">
+                    <h3 data-en="Professional Skills" data-zh="专业技能">Professional Skills</h3>
+                    <div class="skill-item">
+                        <div class="skill-info">
+                            <span class="skill-name" data-en="Strategic Planning" data-zh="战略规划">Strategic Planning</span>
+                            <span>90%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-width="90%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-info">
+                            <span class="skill-name" data-en="Business Analysis" data-zh="业务分析">Business Analysis</span>
+                            <span>85%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-width="85%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-info">
+                            <span class="skill-name" data-en="Market Research" data-zh="市场研究">Market Research</span>
+                            <span>80%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-width="80%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-info">
+                            <span class="skill-name" data-en="Project Management" data-zh="项目管理">Project Management</span>
+                            <span>85%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-width="85%"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="skills-category">
+                    <h3 data-en="Technical Skills" data-zh="技术技能">Technical Skills</h3>
+                    <div class="skill-item">
+                        <div class="skill-info">
+                            <span class="skill-name" data-en="Microsoft Office Suite" data-zh="微软Office套件">Microsoft Office Suite</span>
+                            <span>95%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-width="95%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-info">
+                            <span class="skill-name" data-en="Data Analysis" data-zh="数据分析">Data Analysis</span>
+                            <span>80%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-width="80%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-info">
+                            <span class="skill-name" data-en="SQL" data-zh="SQL">SQL</span>
+                            <span>70%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-width="70%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-info">
+                            <span class="skill-name" data-en="Python" data-zh="Python">Python</span>
+                            <span>65%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-width="65%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 联系部分 -->
+    <section id="contact" class="section">
+        <div class="container">
+            <h2 class="section-title" data-en="Contact Me" data-zh="联系我">Contact Me</h2>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <h3 data-en="Get In Touch" data-zh="联系方式">Get In Touch</h3>
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span class="address" data-en="Apartment 804, Bouchon Point, 7 Cendal Crescent, London, E1 2FT" data-zh="London，Cendal Crescent，Bouchon Point，E1 2FT">Apartment 804, Bouchon Point, 7 Cendal Crescent, London, E1 2FT</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <a href="mailto:cvlaleriac@gmail.com">cvlaleriac@gmail.com</a>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-phone"></i>
+                            <a href="tel:+4407719709745" class="phone-number">+4407719709745</a>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fab fa-linkedin"></i>
+                            <a href="#" target="_blank" data-en="LinkedIn Profile" data-zh="领英主页">LinkedIn Profile</a>
+                        </div>
+                    </div>
+                    <h3 data-en="Social Profiles" data-zh="社交媒体">Social Profiles</h3>
+                    <div class="contact-social">
+                        <a href="#" class="social-link" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="social-link" target="_blank"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-link" target="_blank"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                
+                <div class="contact-form">
+                    <form id="contactForm" action="https://formspree.io/f/your-formspree-id" method="POST">
+                        <div class="form-group">
+                            <label for="name" data-en="Your Name" data-zh="您的姓名">Your Name</label>
+                            <input type="text" id="name" name="name" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email" data-en="Your Email" data-zh="您的邮箱">Your Email</label>
+                            <input type="email" id="email" name="email" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="subject" data-en="Subject" data-zh="主题">Subject</label>
+                            <input type="text" id="subject" name="subject" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message" data-en="Your Message" data-zh="您的留言">Your Message</label>
+                            <textarea id="message" name="message" class="form-control" rows="5" required></textarea>
+                        </div>
+                        <button type="submit" class="btn submit-btn" data-en="Send Message" data-zh="发送留言">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <p>
+                    <span data-en="© 2024 Valeria Li. All Rights Reserved." data-zh="© 2024 李聪聪. 版权所有.">© 2024 Valeria Li. All Rights Reserved.</span>
+                </p>
+                <div class="footer-social">
+                    <a href="#" class="social-link" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" class="social-link" target="_blank"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-link" target="_blank"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+</html> 
