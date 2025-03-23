@@ -1,16 +1,17 @@
 :root {
-    --primary-color: #4a6da7;      /* 蓝色作为主色调 */
-    --secondary-color: #2c3e50;    /* 深蓝色作为次要色调 */
-    --accent-color: #3498db;       /* 天蓝色作为强调色 */
-    --background-color: #fafafa;   /* 页面背景色 */
+    --primary-color: #1e4d8c;      /* 深蓝色作为主色调 */
+    --secondary-color: #0a2351;    /* 更深蓝色作为次要色调 */
+    --accent-color: #3ca3e4;       /* 亮蓝色作为强调色 */
+    --background-color: #f0f5fb;   /* 浅蓝背景色 */
     --card-bg: #ffffff;            /* 卡片背景色 */
     --text-color: #333333;         /* 主要文字颜色 */
-    --text-light: #777777;         /* 浅色文字 */
-    --border-color: #eeeeee;       /* 边框颜色 */
-    --shadow: 0 5px 15px rgba(0, 0, 0, 0.1); /* 阴影效果 */
+    --text-light: #555555;         /* 浅色文字 - 比之前深一些 */
+    --border-color: #d0d8e6;       /* 边框颜色 - 带蓝色调 */
+    --shadow: 0 5px 15px rgba(30, 77, 140, 0.15); /* 阴影效果 - 蓝色调 */
     --white: #ffffff;              /* 白色 */
     --black: #111111;              /* 黑色 */
     --gradient: linear-gradient(135deg, var(--primary-color), var(--accent-color)); /* 渐变背景 */
+    --section-bg: #e6eef7;         /* 部分区域的背景色 */
 }
 
 /* 基本样式重置 */
@@ -102,7 +103,8 @@ body.zh {
 }
 
 .nav-links a:hover, .nav-links a.active {
-    color: var(--primary-color);
+    color: var(--accent-color);
+    font-weight: 600;
 }
 
 .nav-links a::after {
@@ -205,21 +207,21 @@ body.zh {
 .btn {
     display: inline-block;
     padding: 12px 25px;
-    background-color: var(--primary-color);
+    background: var(--primary-color);
     color: var(--white);
     border: none;
     border-radius: 50px;
-    font-weight: 500;
+    font-weight: 600;
     text-decoration: none;
     transition: all 0.3s ease;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 8px rgba(30, 77, 140, 0.3);
     cursor: pointer;
 }
 
 .btn:hover {
+    background: var(--accent-color);
     transform: translateY(-3px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-    background-color: var(--secondary-color);
+    box-shadow: 0 6px 12px rgba(30, 77, 140, 0.4);
 }
 
 .download-btn {
@@ -261,6 +263,9 @@ body.zh .download-btn span {
     margin-bottom: 50px;
     position: relative;
     font-size: 2.2rem;
+    color: var(--primary-color);
+    font-weight: 700;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.1);
 }
 
 .section-title::after {
@@ -450,6 +455,7 @@ body.zh .download-btn span {
     overflow: hidden;
     box-shadow: var(--shadow);
     transition: all 0.3s ease;
+    border: 1px solid var(--border-color);
 }
 
 .project-card:hover {
@@ -465,6 +471,8 @@ body.zh .download-btn span {
 
 .project-header h3 {
     margin-bottom: 10px;
+    color: var(--primary-color);
+    font-weight: 600;
 }
 
 .project-tags {
@@ -475,7 +483,9 @@ body.zh .download-btn span {
 }
 
 .tag {
-    background-color: rgba(255, 255, 255, 0.2);
+    background-color: var(--accent-color);
+    color: white;
+    font-weight: 500;
     padding: 5px 10px;
     border-radius: 20px;
     font-size: 0.8rem;
@@ -609,9 +619,9 @@ body.zh .download-btn span {
 .skill-progress {
     height: 100%;
     background: var(--gradient);
-    border-radius: 5px;
-    width: 0;
-    transition: width 1s ease-in-out;
+    border-radius: 3px;
+    position: relative;
+    transition: width 1.5s ease;
 }
 
 /* 联系部分 */
@@ -902,4 +912,35 @@ footer {
     .certificate-content {
         text-align: center;
     }
+}
+
+/* 增强对比度的部分 */
+.timeline-date span {
+    background-color: var(--primary-color);
+    color: white;
+    font-weight: 600;
+}
+
+/* 交替背景色，提高可读性 */
+section:nth-child(even) {
+    background-color: var(--section-bg);
+}
+
+section:nth-child(odd) {
+    background-color: var(--background-color);
+}
+
+/* 确保按钮更加醒目 */
+.btn {
+    background: var(--primary-color);
+    color: var(--white);
+    font-weight: 600;
+    box-shadow: 0 4px 8px rgba(30, 77, 140, 0.3);
+    transition: all 0.3s ease;
+}
+
+.btn:hover {
+    background: var(--accent-color);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px rgba(30, 77, 140, 0.4);
 } 
