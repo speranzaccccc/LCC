@@ -1,7 +1,7 @@
 :root {
-    --primary-color: #6a5acd;      /* 紫色作为主色调 */
-    --secondary-color: #ff69b4;    /* 粉色作为次要色调 */
-    --accent-color: #20b2aa;       /* 浅绿色作为强调色 */
+    --primary-color: #4a6da7;      /* 蓝色作为主色调 */
+    --secondary-color: #2c3e50;    /* 深蓝色作为次要色调 */
+    --accent-color: #3498db;       /* 天蓝色作为强调色 */
     --background-color: #fafafa;   /* 页面背景色 */
     --card-bg: #ffffff;            /* 卡片背景色 */
     --text-color: #333333;         /* 主要文字颜色 */
@@ -10,7 +10,7 @@
     --shadow: 0 5px 15px rgba(0, 0, 0, 0.1); /* 阴影效果 */
     --white: #ffffff;              /* 白色 */
     --black: #111111;              /* 黑色 */
-    --gradient: linear-gradient(135deg, var(--primary-color), var(--secondary-color)); /* 渐变背景 */
+    --gradient: linear-gradient(135deg, var(--primary-color), var(--accent-color)); /* 渐变背景 */
 }
 
 /* 基本样式重置 */
