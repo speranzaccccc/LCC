@@ -168,7 +168,7 @@ body.zh {
 
 /* 首页英雄版块样式 */
 .hero {
-    height: 70vh; /* 减少高度，使About Me部分更容易看到 */
+    height: 100vh; /* 恢复为全高 */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -177,8 +177,8 @@ body.zh {
     background-position: center;
     position: relative;
     color: var(--white);
-    margin-top: 70px; /* 添加顶部外边距，等于导航栏高度 */
-    padding-top: 0; /* 移除顶部内边距 */
+    padding: 0; /* 移除所有内边距 */
+    margin: 0; /* 移除所有外边距 */
 }
 
 .hero::before {
@@ -205,16 +205,20 @@ body.zh {
 }
 
 .hero-content {
-    position: relative;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     z-index: 1;
+    width: 100%;
     max-width: 700px;
     text-align: center;
     padding: 0 20px;
 }
 
 .hero h1 {
-    font-size: 4rem; /* 增大字体大小 */
-    margin-bottom: 20px;
+    font-size: 4.5rem; /* 增大字体大小 */
+    margin-bottom: 30px; /* 增加与下方标题的距离 */
     color: var(--white);
     font-weight: 700;
     line-height: 1.2;
@@ -989,8 +993,7 @@ footer {
     }
     
     .hero {
-        height: 60vh; /* 在小屏幕上进一步减少高度 */
-        margin-top: 70px;
+        height: 100vh; /* 在移动设备上保持全高 */
     }
     
     .hero-content {
@@ -1002,7 +1005,7 @@ footer {
     }
     
     .hero h1 {
-        font-size: 3rem; /* 在小屏幕上减小字体大小 */
+        font-size: 3.5rem; /* 适当减小字体大小 */
     }
     
     .hero h2 {
@@ -1020,7 +1023,7 @@ footer {
     }
     
     .hero h1 {
-        font-size: 2.5rem; /* 在更小的屏幕上进一步减小字体大小 */
+        font-size: 3rem; /* 在更小的屏幕上进一步减小字体大小 */
     }
     
     .hero h2 {

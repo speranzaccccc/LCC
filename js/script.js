@@ -10,10 +10,6 @@ document.addEventListener('DOMContentLoaded', function() {
     
     console.log("Language buttons:", enBtn, zhBtn);
     
-    // 初始化页面语言
-    const savedLanguage = localStorage.getItem('language') || 'en';
-    console.log("Initial language from storage:", savedLanguage);
-    
     // 电话号码元素
     const phoneElements = document.querySelectorAll('.phone-number-en');
     console.log("Phone elements found:", phoneElements.length);
@@ -26,77 +22,59 @@ document.addEventListener('DOMContentLoaded', function() {
         console.log("Made section visible:", section.id);
     });
     
-    // 全面的语言切换函数
+    // 语言切换函数
     function setLanguage(lang) {
-        console.log("Setting language to:", lang);
+        // 获取所有带有data-en和data-zh属性的元素
+        const elementsWithLangData = document.querySelectorAll('[data-en][data-zh]');
         
-        // 设置body类
-        body.className = lang;
-        localStorage.setItem('language', lang);
+        // 设置body的类名，用于控制字体和其他样式
+        document.body.className = lang;
+        
+        // 更新元素内容
+        elementsWithLangData.forEach(el => {
+            // 检查元素是否为h1的子元素，确保能正确切换名字
+            if (el.tagName === 'SPAN' && el.parentElement.tagName === 'H1') {
+                el.textContent = el.getAttribute(`data-${lang}`);
+            } 
+            // 对于导航链接和下载按钮特殊处理
+            else if (el.closest('.nav-links') || el.closest('.download-btn')) {
+                el.textContent = el.getAttribute(`data-${lang}`);
+            }
+            // 其他元素
+            else {
+                el.textContent = el.getAttribute(`data-${lang}`);
+            }
+        });
         
         // 更新按钮状态
-        if (lang === 'zh') {
-            enBtn.classList.remove('active');
-            zhBtn.classList.add('active');
-        } else {
-            enBtn.classList.add('active');
-            zhBtn.classList.remove('active');
-        }
+        document.getElementById('en-btn').classList.toggle('active', lang === 'en');
+        document.getElementById('zh-btn').classList.toggle('active', lang === 'zh');
         
-        // 根据语言切换简历下载链接
-        const downloadBtn = document.querySelector('.download-btn');
-        if (downloadBtn) {
-            if (lang === 'zh') {
-                downloadBtn.setAttribute('href', 'CV Chinese.pdf');
-            } else {
-                downloadBtn.setAttribute('href', 'CV English.pdf');
-            }
-        }
-        
-        // 更新电话号码的href和显示文本
-        phoneElements.forEach(phone => {
-            console.log("Processing phone element:", phone);
-            const phoneNumber = phone.getAttribute(`data-${lang}`);
-            console.log("Phone number for", lang, ":", phoneNumber);
-            phone.textContent = phoneNumber;
-            phone.href = `tel:${phoneNumber}`;
-        });
-        
-        // 更新所有带data-en/data-zh属性的元素
-        document.querySelectorAll(`[data-${lang}]`).forEach(element => {
-            try {
-                element.textContent = element.getAttribute(`data-${lang}`);
-                console.log("Updated element:", element.tagName, "with text:", element.textContent.substring(0, 20) + "...");
-            } catch (e) {
-                console.error("Error updating element:", element, e);
-            }
-        });
+        // 保存用户的语言选择到localStorage
+        localStorage.setItem('preferredLanguage', lang);
     }
     
-    // 语言切换事件监听
-    if (enBtn) {
-        enBtn.addEventListener('click', function() {
-            console.log("English button clicked");
-            setLanguage('en');
-        });
-    }
+    // 当页面加载时，获取保存的语言偏好
+    const savedLanguage = localStorage.getItem('preferredLanguage') || 'en';
     
-    if (zhBtn) {
-        zhBtn.addEventListener('click', function() {
-            console.log("Chinese button clicked");
-            setLanguage('zh');
-        });
-    }
-    
-    // 初始调用一次设置语言
+    // 设置初始语言
     setLanguage(savedLanguage);
+    
+    // 添加按钮点击事件
+    document.getElementById('en-btn').addEventListener('click', function() {
+        setLanguage('en');
+    });
+    
+    document.getElementById('zh-btn').addEventListener('click', function() {
+        setLanguage('zh');
+    });
     
     // Navigation Toggle for Mobile
     const hamburger = document.querySelector('.hamburger');
     const navLinks = document.querySelector('.nav-links');
 
     if (hamburger) {
-        hamburger.addEventListener('click', () => {
+        hamburger.addEventListener('click', function() {
             navLinks.classList.toggle('active');
             hamburger.classList.toggle('active');
         });
@@ -212,7 +190,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     
     // Navbar scroll effect
-    window.addEventListener('scroll', () => {
+    window.addEventListener('scroll', function() {
         const navbar = document.querySelector('.navbar');
         if (window.scrollY > 50) {
             navbar.classList.add('scroll');
