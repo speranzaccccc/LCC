@@ -1,17 +1,17 @@
 :root {
-    --primary-color: #2c3e50;      /* 深灰蓝色 - 更中性 */
-    --secondary-color: #34495e;    /* 稍深灰蓝色 */
-    --accent-color: #3498db;       /* 蓝色 */
-    --background-color: #ffffff;   /* 白色背景 */
+    --primary-color: #2A3F54;      /* 深蓝色 - 主要颜色 */
+    --secondary-color: #FF6B6B;    /* 粉红色 - 次要颜色 */
+    --accent-color: #FF6B6B;       /* 粉红色 */
+    --background-color: #f9f9f9;   /* 浅灰背景 */
     --card-bg: #ffffff;            /* 白色 */
     --text-color: #333333;         /* 深灰色文字 */
-    --text-light: #555555;         /* 灰色文字 */
-    --border-color: #eeeeee;       /* 浅灰边框 */
-    --shadow: 0 5px 15px rgba(0, 0, 0, 0.03); /* 更轻的阴影效果 */
+    --text-light: #5d5d5d;         /* 灰色文字 */
+    --border-color: #e0e0e0;       /* 浅灰边框 */
+    --shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* 阴影效果 */
     --white: #ffffff;              /* 白色 */
     --black: #111111;              /* 黑色 */
-    --gradient: linear-gradient(135deg, #34495e, #3498db); /* 更简单的渐变背景 */
-    --section-bg: #f9f9f9;         /* 非常浅的灰色背景 - 更加简约 */
+    --gradient: linear-gradient(135deg, #2A3F54, #FF6B6B); /* 渐变背景 */
+    --section-bg: #f9f9f9;         /* 浅灰色背景 */
 }
 
 /* 基本样式重置 */
@@ -50,7 +50,7 @@ body.zh {
 
 /* 导航栏样式 */
 .navbar {
-    background-color: var(--white);
+    background-color: var(--primary-color);
     box-shadow: var(--shadow);
     position: fixed;
     top: 0;
@@ -75,16 +75,14 @@ body.zh {
 .logo {
     font-size: 1.8rem;
     font-weight: 700;
-    color: var(--primary-color);
+    color: var(--white);
     text-decoration: none;
     display: flex;
     align-items: center;
 }
 
 .logo span {
-    background: var(--gradient);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    color: var(--white);
 }
 
 .nav-links {
@@ -94,7 +92,7 @@ body.zh {
 }
 
 .nav-links a {
-    color: var(--text-color);
+    color: var(--white);
     text-decoration: none;
     font-weight: 500;
     position: relative;
@@ -103,7 +101,7 @@ body.zh {
 }
 
 .nav-links a:hover, .nav-links a.active {
-    color: var(--accent-color);
+    color: var(--secondary-color);
     font-weight: 600;
 }
 
@@ -164,11 +162,11 @@ body.zh {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: #f8f9fa; /* 更简约的纯色背景 */
+    background: linear-gradient(rgba(42, 63, 84, 0.9), rgba(42, 63, 84, 0.7)), url('../img/hero-bg.jpg');
+    background-size: cover;
+    background-position: center;
     position: relative;
-    overflow: hidden;
-    color: var(--text-color);
-    padding-top: 80px; /* 增加顶部内边距，防止导航栏遮挡 */
+    color: var(--white);
 }
 
 .hero::before {
@@ -199,15 +197,13 @@ body.zh {
     z-index: 1;
     max-width: 700px;
     text-align: center;
-    width: 100%;
     padding: 0 20px;
-    margin-top: -60px; /* 向上移动内容，避免被顶部导航栏遮挡 */
 }
 
 .hero h1 {
     font-size: 3.5rem;
     margin-bottom: 20px;
-    color: var(--primary-color);
+    color: var(--white);
     font-weight: 700;
     line-height: 1.2;
 }
@@ -215,7 +211,8 @@ body.zh {
 .hero h2 {
     font-size: 1.8rem;
     margin-bottom: 25px;
-    color: var(--secondary-color);
+    color: var(--white);
+    font-weight: 400;
 }
 
 .hero-cta {
@@ -251,6 +248,16 @@ body.zh {
     padding: 15px 30px !important;
     font-size: 1.1rem !important;
     background-color: var(--secondary-color) !important;
+    color: var(--white) !important;
+    border-radius: 4px !important;
+    transition: all 0.3s ease !important;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2) !important;
+}
+
+.download-btn:hover {
+    background-color: #ff5252 !important;
+    transform: translateY(-3px) !important;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3) !important;
 }
 
 .download-btn i {
@@ -423,17 +430,17 @@ body.zh .download-btn span {
     color: var(--white);
     padding: 8px 15px;
     background-color: var(--primary-color);
-    border-radius: 20px;
+    border-radius: 4px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     z-index: 3;
 }
 
 .timeline-item:nth-child(odd) .timeline-date {
-    right: -200px; /* 增加与时间线的距离 */
+    right: -220px; /* 增加与时间线的距离 */
 }
 
 .timeline-item:nth-child(even) .timeline-date {
-    left: -200px; /* 增加与时间线的距离 */
+    left: -220px; /* 增加与时间线的距离 */
 }
 
 .timeline-content {
@@ -501,13 +508,15 @@ body.zh .download-btn span {
 
 .project-header {
     padding: 20px;
-    background: var(--gradient);
+    background: var(--primary-color);
     color: var(--white);
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
 }
 
 .project-header h3 {
     margin-bottom: 10px;
-    color: var(--primary-color);
+    color: var(--white);
     font-weight: 600;
 }
 
@@ -519,11 +528,11 @@ body.zh .download-btn span {
 }
 
 .tag {
-    background-color: var(--accent-color);
-    color: white;
+    background-color: var(--secondary-color);
+    color: var(--white);
     font-weight: 500;
     padding: 5px 10px;
-    border-radius: 20px;
+    border-radius: 4px;
     font-size: 0.8rem;
 }
 
