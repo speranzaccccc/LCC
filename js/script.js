@@ -22,6 +22,16 @@ document.addEventListener('DOMContentLoaded', function() {
             zhBtn.classList.remove('active');
         }
         
+        // 根据语言切换简历下载链接
+        const downloadBtn = document.querySelector('.download-btn');
+        if (downloadBtn) {
+            if (lang === 'zh') {
+                downloadBtn.setAttribute('href', '简历.pdf');
+            } else {
+                downloadBtn.setAttribute('href', 'CV.pdf');
+            }
+        }
+        
         // 1. 确保导航链接正确显示
         document.querySelectorAll('.nav-links a').forEach(function(link) {
             if (link.hasAttribute('data-' + lang)) {
@@ -30,13 +40,13 @@ document.addEventListener('DOMContentLoaded', function() {
         });
         
         // 2. 确保下载按钮正确显示
-        const downloadBtn = document.querySelector('.download-btn span');
-        if (downloadBtn && downloadBtn.hasAttribute('data-' + lang)) {
-            console.log('Setting download button text to:', downloadBtn.getAttribute('data-' + lang));
-            downloadBtn.textContent = downloadBtn.getAttribute('data-' + lang);
-            downloadBtn.style.display = 'inline-block';
-            downloadBtn.style.visibility = 'visible';
-            downloadBtn.style.opacity = '1';
+        const downloadBtnSpan = document.querySelector('.download-btn span');
+        if (downloadBtnSpan && downloadBtnSpan.hasAttribute('data-' + lang)) {
+            console.log('Setting download button text to:', downloadBtnSpan.getAttribute('data-' + lang));
+            downloadBtnSpan.textContent = downloadBtnSpan.getAttribute('data-' + lang);
+            downloadBtnSpan.style.display = 'inline-block';
+            downloadBtnSpan.style.visibility = 'visible';
+            downloadBtnSpan.style.opacity = '1';
         }
         
         // 3. 确保所有带data-en/data-zh属性的元素正确显示
@@ -125,18 +135,24 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    // 从本地存储获取语言设置
-    const savedLanguage = localStorage.getItem('language') || 'en';
-    
-    // 设置初始状态
-    body.className = savedLanguage;
-    if (savedLanguage === 'zh') {
-        enBtn.classList.remove('active');
-        zhBtn.classList.add('active');
-        setLanguage('zh');
+    // 页面加载时检查本地存储的语言偏好
+    let savedLanguage = localStorage.getItem('language');
+    if (savedLanguage) {
+        // 根据存储的语言设置初始状态
+        setLanguage(savedLanguage);
     } else {
-        enBtn.classList.add('active');
-        zhBtn.classList.remove('active');
+        // 默认使用英文
+        setLanguage('en');
+    }
+    
+    // 初始设置简历下载链接
+    const downloadBtn = document.querySelector('.download-btn');
+    if (downloadBtn) {
+        if (body.className === 'zh') {
+            downloadBtn.setAttribute('href', '简历.pdf');
+        } else {
+            downloadBtn.setAttribute('href', 'CV.pdf');
+        }
     }
     
     // 添加按钮事件监听器
