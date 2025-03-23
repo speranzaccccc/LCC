@@ -1,17 +1,17 @@
 :root {
-    --primary-color: #1e4d8c;      /* 深蓝色作为主色调 */
-    --secondary-color: #0a2351;    /* 更深蓝色作为次要色调 */
-    --accent-color: #3ca3e4;       /* 亮蓝色作为强调色 */
-    --background-color: #f0f5fb;   /* 浅蓝背景色 */
+    --primary-color: #2c3e50;      /* 深灰蓝色作为主色调 - 更加中性 */
+    --secondary-color: #34495e;    /* 稍浅灰蓝色作为次要色调 */
+    --accent-color: #3498db;       /* 蓝色作为强调色 */
+    --background-color: #f5f5f5;   /* 浅灰色背景 - 更加中性 */
     --card-bg: #ffffff;            /* 卡片背景色 */
     --text-color: #333333;         /* 主要文字颜色 */
-    --text-light: #555555;         /* 浅色文字 - 比之前深一些 */
-    --border-color: #d0d8e6;       /* 边框颜色 - 带蓝色调 */
-    --shadow: 0 5px 15px rgba(30, 77, 140, 0.15); /* 阴影效果 - 蓝色调 */
+    --text-light: #555555;         /* 浅色文字 */
+    --border-color: #dddddd;       /* 边框颜色 - 更加中性 */
+    --shadow: 0 5px 15px rgba(0, 0, 0, 0.1); /* 阴影效果 */
     --white: #ffffff;              /* 白色 */
     --black: #111111;              /* 黑色 */
     --gradient: linear-gradient(135deg, var(--primary-color), var(--accent-color)); /* 渐变背景 */
-    --section-bg: #e6eef7;         /* 部分区域的背景色 */
+    --section-bg: #eaeaea;         /* 部分区域的背景色 - 更加中性 */
 }
 
 /* 基本样式重置 */
@@ -305,10 +305,16 @@ body.zh .download-btn span {
 
 .about-text {
     flex: 1.5;
+    background-color: var(--card-bg);
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border-color);
 }
 
 .about-text p {
     margin-bottom: 15px;
+    line-height: 1.7;
 }
 
 .about-info {
@@ -316,6 +322,10 @@ body.zh .download-btn span {
     grid-template-columns: repeat(2, 1fr);
     gap: 20px;
     margin-top: 30px;
+    background-color: var(--background-color);
+    padding: 15px;
+    border-radius: 8px;
+    border-top: 3px solid var(--accent-color);
 }
 
 .info-item {
@@ -326,8 +336,10 @@ body.zh .download-btn span {
 
 .info-item i {
     font-size: 1.2rem;
-    color: var(--primary-color);
+    color: var(--accent-color);
     margin-right: 10px;
+    width: 25px;
+    text-align: center;
 }
 
 /* 教育经历样式 */
@@ -636,11 +648,29 @@ body.zh .download-btn span {
 
 .contact-info {
     flex: 1;
+    background-color: var(--card-bg);
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border-color);
 }
 
 .contact-info h3 {
     color: var(--primary-color);
     margin-bottom: 20px;
+    font-size: 1.5rem;
+    position: relative;
+    padding-bottom: 10px;
+}
+
+.contact-info h3:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 50px;
+    height: 3px;
+    background: var(--accent-color);
 }
 
 .contact-details {
@@ -650,13 +680,27 @@ body.zh .download-btn span {
 .contact-item {
     display: flex;
     align-items: center;
-    margin-bottom: 15px;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px dashed var(--border-color);
+}
+
+.contact-item:last-child {
+    border-bottom: none;
 }
 
 .contact-item i {
     font-size: 1.2rem;
-    color: var(--primary-color);
+    color: var(--accent-color);
     margin-right: 15px;
+    width: 25px;
+    height: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(52, 152, 219, 0.1);
+    border-radius: 50%;
+    padding: 20px;
 }
 
 .contact-item a {
@@ -666,12 +710,13 @@ body.zh .download-btn span {
 }
 
 .contact-item a:hover {
-    color: var(--primary-color);
+    color: var(--accent-color);
 }
 
 .contact-social {
     display: flex;
     gap: 15px;
+    margin-top: 20px;
 }
 
 .social-link {
@@ -688,12 +733,17 @@ body.zh .download-btn span {
 }
 
 .social-link:hover {
-    background-color: var(--secondary-color);
+    background-color: var(--accent-color);
     transform: translateY(-3px);
 }
 
 .contact-form {
     flex: 1.5;
+    background-color: var(--card-bg);
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border-color);
 }
 
 .form-group {
@@ -704,6 +754,7 @@ body.zh .download-btn span {
     display: block;
     margin-bottom: 8px;
     font-weight: 500;
+    color: var(--primary-color);
 }
 
 .form-control {
@@ -712,12 +763,14 @@ body.zh .download-btn span {
     border: 1px solid var(--border-color);
     border-radius: 5px;
     transition: all 0.3s ease;
+    background-color: #f9f9f9;
 }
 
 .form-control:focus {
     outline: none;
-    border-color: var(--primary-color);
-    box-shadow: 0 0 0 3px rgba(106, 90, 205, 0.1);
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+    background-color: var(--white);
 }
 
 textarea.form-control {
@@ -733,10 +786,14 @@ textarea.form-control {
     border-radius: 5px;
     cursor: pointer;
     transition: all 0.3s ease;
+    width: 100%;
+    font-weight: 600;
+    font-size: 1rem;
 }
 
 .submit-btn:hover {
-    background-color: var(--secondary-color);
+    background-color: var(--accent-color);
+    transform: translateY(-3px);
 }
 
 /* 页脚样式 */

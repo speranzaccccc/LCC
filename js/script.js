@@ -5,6 +5,13 @@ document.addEventListener('DOMContentLoaded', function() {
     const zhBtn = document.getElementById('zh-btn');
     const body = document.body;
     
+    // 初始化页面语言
+    const savedLanguage = localStorage.getItem('language') || 'en';
+    setLanguage(savedLanguage);
+    
+    // 电话号码元素
+    const phoneElements = document.querySelectorAll('.phone-number-en');
+    
     // 全面的语言切换函数
     function setLanguage(lang) {
         console.log("Setting language to:", lang);
@@ -32,17 +39,12 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
         
-        // 根据语言切换电话号码
-        const phoneElement = document.querySelector('.phone-number');
-        if (phoneElement) {
-            if (lang === 'zh') {
-                phoneElement.textContent = '+8613857754504';
-                phoneElement.setAttribute('href', 'tel:+8613857754504');
-            } else {
-                phoneElement.textContent = '+4407719709745';
-                phoneElement.setAttribute('href', 'tel:+4407719709745');
-            }
-        }
+        // 更新电话号码的href和显示文本
+        phoneElements.forEach(phone => {
+            const phoneNumber = phone.getAttribute(`data-${lang}`);
+            phone.textContent = phoneNumber;
+            phone.href = `tel:${phoneNumber}`;
+        });
         
         // 1. 确保导航链接正确显示
         document.querySelectorAll('.nav-links a').forEach(function(link) {
@@ -147,43 +149,18 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    // 页面加载时检查本地存储的语言偏好
-    let savedLanguage = localStorage.getItem('language');
-    if (savedLanguage) {
-        // 根据存储的语言设置初始状态
-        setLanguage(savedLanguage);
-    } else {
-        // 默认使用英文
-        setLanguage('en');
-    }
-    
-    // 初始设置简历下载链接
-    const downloadBtn = document.querySelector('.download-btn');
-    if (downloadBtn) {
-        if (body.className === 'zh') {
-            downloadBtn.setAttribute('href', 'CV Chinese.pdf');
-        } else {
-            downloadBtn.setAttribute('href', 'CV English.pdf');
-        }
-    }
-    
-    // 添加按钮事件监听器
-    enBtn.addEventListener('click', function() {
-        setLanguage('en');
-    });
-    
-    zhBtn.addEventListener('click', function() {
-        setLanguage('zh');
-    });
+    // 语言切换事件监听
+    enBtn.addEventListener('click', () => setLanguage('en'));
+    zhBtn.addEventListener('click', () => setLanguage('zh'));
     
     // Navigation Toggle for Mobile
     const hamburger = document.querySelector('.hamburger');
     const navLinks = document.querySelector('.nav-links');
 
     if (hamburger) {
-        hamburger.addEventListener('click', function() {
-            hamburger.classList.toggle('active');
+        hamburger.addEventListener('click', () => {
             navLinks.classList.toggle('active');
+            hamburger.classList.toggle('active');
         });
     }
 
@@ -198,15 +175,15 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Smooth scrolling for anchor links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function(e) {
+        anchor.addEventListener('click', function (e) {
             e.preventDefault();
             
-            const targetId = this.getAttribute('href');
-            const targetElement = document.querySelector(targetId);
+            navLinks.classList.remove('active');
+            hamburger.classList.remove('active');
             
-            if (targetElement) {
-                window.scrollTo({
-                    top: targetElement.offsetTop - 90, // Adjusted for the fixed header
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({
                     behavior: 'smooth'
                 });
             }
@@ -242,48 +219,37 @@ document.addEventListener('DOMContentLoaded', function() {
     const skillBars = document.querySelectorAll('.skill-progress');
     
     if (skillsSection) {
-        window.addEventListener('scroll', function() {
-            if (isInViewport(skillsSection)) {
-                skillBars.forEach(bar => {
-                    const width = bar.getAttribute('data-width') || '0%';
-                    bar.style.width = '0';
-                    setTimeout(() => {
-                        bar.style.transition = 'width 1s ease-in-out';
-                        bar.style.width = width;
-                    }, 100);
-                });
-                // Remove event listener after animation is triggered
-                window.removeEventListener('scroll', arguments.callee);
-            }
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const width = entry.target.getAttribute('data-width');
+                    entry.target.style.width = width;
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.2 });
+        
+        skillBars.forEach(item => {
+            observer.observe(item);
         });
     }
 
-    // Helper function to check if element is in viewport
-    function isInViewport(element) {
-        const rect = element.getBoundingClientRect();
-        return (
-            rect.top <= (window.innerHeight || document.documentElement.clientHeight) &&
-            rect.bottom >= 0
-        );
-    }
-    
     // Add animation classes on scroll for timeline items
     const timelineItems = document.querySelectorAll('.timeline-item');
     
-    function checkTimelineItems() {
-        timelineItems.forEach(item => {
-            const itemTop = item.getBoundingClientRect().top;
-            const windowHeight = window.innerHeight;
-            
-            if (itemTop < windowHeight - 100) {
-                item.classList.add('animate');
+    const timelineObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('animate');
+                timelineObserver.unobserve(entry.target);
             }
         });
-    }
+    }, { threshold: 0.1 });
     
     if (timelineItems.length > 0) {
-        window.addEventListener('scroll', checkTimelineItems);
-        window.addEventListener('load', checkTimelineItems);
+        timelineItems.forEach(item => {
+            timelineObserver.observe(item);
+        });
     }
     
     // Add scroll to top button functionality
@@ -292,15 +258,15 @@ document.addEventListener('DOMContentLoaded', function() {
     scrollToTopBtn.className = 'scroll-to-top';
     document.body.appendChild(scrollToTopBtn);
     
-    window.addEventListener('scroll', function() {
-        if (window.pageYOffset > 300) {
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 500) {
             scrollToTopBtn.classList.add('show');
         } else {
             scrollToTopBtn.classList.remove('show');
         }
     });
     
-    scrollToTopBtn.addEventListener('click', function() {
+    scrollToTopBtn.addEventListener('click', () => {
         window.scrollTo({
             top: 0,
             behavior: 'smooth'
@@ -308,7 +274,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     
     // Navbar scroll effect
-    window.addEventListener('scroll', function() {
+    window.addEventListener('scroll', () => {
         const navbar = document.querySelector('.navbar');
         if (window.scrollY > 50) {
             navbar.classList.add('scroll');
