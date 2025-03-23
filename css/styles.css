@@ -168,6 +168,7 @@ body.zh {
     position: relative;
     overflow: hidden;
     color: var(--text-color);
+    padding-top: 80px; /* 增加顶部内边距，防止导航栏遮挡 */
 }
 
 .hero::before {
@@ -200,6 +201,7 @@ body.zh {
     text-align: center;
     width: 100%;
     padding: 0 20px;
+    margin-top: -60px; /* 向上移动内容，避免被顶部导航栏遮挡 */
 }
 
 .hero h1 {
@@ -427,11 +429,11 @@ body.zh .download-btn span {
 }
 
 .timeline-item:nth-child(odd) .timeline-date {
-    right: -160px;
+    right: -200px; /* 增加与时间线的距离 */
 }
 
 .timeline-item:nth-child(even) .timeline-date {
-    left: -160px;
+    left: -200px; /* 增加与时间线的距离 */
 }
 
 .timeline-content {
@@ -531,7 +533,7 @@ body.zh .download-btn span {
 
 .project-date {
     color: var(--primary-color);
-    margin-bottom: 15px;
+    margin-bottom: 20px; /* 增加与下方内容的距离 */
     font-weight: 500;
     display: inline-block;
     padding: 5px 12px;
@@ -929,10 +931,11 @@ footer {
     .timeline-item:nth-child(odd) .timeline-date,
     .timeline-item:nth-child(even) .timeline-date {
         left: 0;
-        top: -30px;
+        top: -40px; /* 增加与内容的距离 */
         position: relative;
-        display: block;
-        margin-bottom: 10px;
+        display: inline-block;
+        margin-bottom: 20px; /* 增加与内容的距离 */
+        width: auto;
     }
     
     .hamburger {
@@ -968,6 +971,11 @@ footer {
     
     .hero h2 {
         font-size: 1.5rem;
+    }
+    
+    .hero-content {
+        margin-top: 0; /* 移动设备上不需要上移 */
+        padding-top: 80px; /* 增加顶部内边距 */
     }
 }
 
