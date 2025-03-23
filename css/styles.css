@@ -1,17 +1,17 @@
 :root {
-    --primary-color: #34495e;      /* 深灰蓝色 - 更中性 */
-    --secondary-color: #2c3e50;    /* 更深灰蓝色 */
+    --primary-color: #2c3e50;      /* 深灰蓝色 - 更中性 */
+    --secondary-color: #34495e;    /* 稍深灰蓝色 */
     --accent-color: #3498db;       /* 蓝色 */
-    --background-color: #f7f9fc;   /* 非常浅的蓝灰色 */
+    --background-color: #ffffff;   /* 白色背景 */
     --card-bg: #ffffff;            /* 白色 */
     --text-color: #333333;         /* 深灰色文字 */
     --text-light: #555555;         /* 灰色文字 */
-    --border-color: #e5e5e5;       /* 浅灰边框 */
-    --shadow: 0 5px 15px rgba(0, 0, 0, 0.05); /* 阴影效果 */
+    --border-color: #eeeeee;       /* 浅灰边框 */
+    --shadow: 0 5px 15px rgba(0, 0, 0, 0.03); /* 更轻的阴影效果 */
     --white: #ffffff;              /* 白色 */
     --black: #111111;              /* 黑色 */
-    --gradient: linear-gradient(135deg, var(--primary-color), var(--accent-color)); /* 渐变背景 */
-    --section-bg: #f0f2f5;         /* 部分区域的背景色 - 更加中性 */
+    --gradient: linear-gradient(135deg, #34495e, #3498db); /* 更简单的渐变背景 */
+    --section-bg: #f9f9f9;         /* 非常浅的灰色背景 - 更加简约 */
 }
 
 /* 基本样式重置 */
@@ -163,7 +163,8 @@ body.zh {
     height: 100vh;
     display: flex;
     align-items: center;
-    background: linear-gradient(120deg, #f8f9fa 0%, #e9ecef 100%);
+    justify-content: center;
+    background: #f8f9fa; /* 更简约的纯色背景 */
     position: relative;
     overflow: hidden;
     color: var(--text-color);
@@ -176,13 +177,11 @@ body.zh {
     left: 0;
     width: 100%;
     height: 100%;
-    background: 
-        radial-gradient(circle at 20% 30%, rgba(52, 152, 219, 0.03) 0%, transparent 80px),
-        radial-gradient(circle at 80% 70%, rgba(41, 128, 185, 0.04) 0%, transparent 120px);
+    background: none; /* 移除复杂图案 */
     z-index: 0;
 }
 
-/* 添加微妙的几何元素 */
+/* 简化背景图案 */
 .hero::after {
     content: '';
     position: absolute;
@@ -190,11 +189,7 @@ body.zh {
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: 
-        linear-gradient(45deg, transparent 48%, rgba(52, 152, 219, 0.03) 49%, rgba(52, 152, 219, 0.03) 51%, transparent 52%),
-        linear-gradient(-45deg, transparent 48%, rgba(52, 152, 219, 0.03) 49%, rgba(52, 152, 219, 0.03) 51%, transparent 52%);
-    background-size: 50px 50px;
-    opacity: 0.5;
+    background-image: none; /* 移除复杂图案 */
     z-index: 0;
 }
 
@@ -202,6 +197,9 @@ body.zh {
     position: relative;
     z-index: 1;
     max-width: 700px;
+    text-align: center;
+    width: 100%;
+    padding: 0 20px;
 }
 
 .hero h1 {
@@ -420,15 +418,20 @@ body.zh .download-btn span {
     position: absolute;
     top: 25px;
     font-weight: 600;
-    color: var(--primary-color);
+    color: var(--white);
+    padding: 8px 15px;
+    background-color: var(--primary-color);
+    border-radius: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    z-index: 3;
 }
 
 .timeline-item:nth-child(odd) .timeline-date {
-    right: -150px;
+    right: -160px;
 }
 
 .timeline-item:nth-child(even) .timeline-date {
-    left: -150px;
+    left: -160px;
 }
 
 .timeline-content {
@@ -527,9 +530,13 @@ body.zh .download-btn span {
 }
 
 .project-date {
-    color: var(--text-light);
+    color: var(--primary-color);
     margin-bottom: 15px;
-    font-style: italic;
+    font-weight: 500;
+    display: inline-block;
+    padding: 5px 12px;
+    background-color: rgba(240, 240, 240, 0.9);
+    border-radius: 20px;
 }
 
 .project-content ul {
@@ -990,20 +997,13 @@ footer {
     }
 }
 
-/* 增强对比度的部分 */
-.timeline-date span {
-    background-color: var(--primary-color);
-    color: white;
-    font-weight: 600;
+/* 修改部分背景色，实现交替效果但更简单 */
+#education, #activities, #contact {
+    background-color: var(--white);
 }
 
-/* 交替背景色，提高可读性 */
-section:nth-child(even) {
+#about, #experience, #projects, #skills {
     background-color: var(--section-bg);
-}
-
-section:nth-child(odd) {
-    background-color: var(--background-color);
 }
 
 /* 确保按钮更加醒目 */
@@ -1040,15 +1040,6 @@ section:nth-child(odd) {
 .timeline-content:hover, .project-card:hover {
     transform: translateY(-5px);
     box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
-}
-
-/* 背景交替样式 */
-section:nth-child(even) {
-    background-color: var(--background-color);
-}
-
-section:nth-child(odd) {
-    background-color: var(--section-bg);
 }
 
 /* 修改hover效果 */
