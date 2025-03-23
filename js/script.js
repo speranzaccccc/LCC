@@ -46,6 +46,24 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
         
+        // 更新简历下载链接
+        const downloadBtn = document.querySelector('.download-btn');
+        if (downloadBtn) {
+            if (lang === 'zh') {
+                downloadBtn.setAttribute('href', 'CV Chinese.pdf');
+            } else {
+                downloadBtn.setAttribute('href', 'CV English.pdf');
+            }
+        }
+        
+        // 更新电话号码的href和显示文本
+        const phoneElements = document.querySelectorAll('.phone-number-en');
+        phoneElements.forEach(phone => {
+            const phoneNumber = phone.getAttribute(`data-${lang}`);
+            phone.textContent = phoneNumber;
+            phone.href = `tel:${phoneNumber}`;
+        });
+        
         // 更新按钮状态
         document.getElementById('en-btn').classList.toggle('active', lang === 'en');
         document.getElementById('zh-btn').classList.toggle('active', lang === 'zh');
