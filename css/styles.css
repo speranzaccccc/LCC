@@ -168,7 +168,7 @@ body.zh {
 
 /* 首页英雄版块样式 */
 .hero {
-    height: 100vh;
+    height: 70vh; /* 减少高度，使About Me部分更容易看到 */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -177,7 +177,8 @@ body.zh {
     background-position: center;
     position: relative;
     color: var(--white);
-    padding-top: 80px; /* 添加顶部内边距，防止导航栏遮挡 */
+    margin-top: 70px; /* 添加顶部外边距，等于导航栏高度 */
+    padding-top: 0; /* 移除顶部内边距 */
 }
 
 .hero::before {
@@ -293,7 +294,7 @@ body.zh .download-btn span {
 
 /* 部分样式 */
 .section {
-    padding: 100px 0;
+    padding: 70px 0; /* 减少内边距 */
 }
 
 .section-title {
@@ -320,6 +321,7 @@ body.zh .download-btn span {
 /* 关于我部分 */
 #about {
     background-color: var(--white);
+    padding-top: 50px; /* 减少顶部内边距 */
 }
 
 .about-content {
@@ -986,9 +988,17 @@ footer {
         font-size: 1.2rem;
     }
     
+    .hero {
+        height: 60vh; /* 在小屏幕上进一步减少高度 */
+        margin-top: 70px;
+    }
+    
     .hero-content {
-        margin-top: 0;
-        padding-top: 60px; /* 移动设备上减少顶部内边距 */
+        padding-top: 0; /* 移除顶部内边距 */
+    }
+    
+    .section {
+        padding: 50px 0; /* 在小屏幕上进一步减少内边距 */
     }
     
     .hero h1 {
@@ -1003,6 +1013,10 @@ footer {
 @media (max-width: 576px) {
     .section {
         padding: 70px 0;
+    }
+    
+    .hero {
+        height: 50vh; /* 在更小的屏幕上更进一步减少高度 */
     }
     
     .hero h1 {
